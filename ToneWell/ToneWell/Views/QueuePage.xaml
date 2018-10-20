@@ -8,7 +8,9 @@
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
 
-        <local:ImageButton Margin="10,10,10,10" Icon="cross.svg" HeightRequest="36" WidthRequest="36" IconSize="36" />
+        <Label Text="Up Next" FontSize="Large" />
+        
+        
 
     </StackLayout>
 

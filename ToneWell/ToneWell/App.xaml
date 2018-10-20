@@ -5,7 +5,11 @@
              x:Class="ToneWell.App">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <ResourceDictionary>
 
-	</Application.Resources>
+            <Color x:Key="BackgroundColor">#ffffff</Color>
+            
+        </ResourceDictionary>
+
+    </Application.Resources>
 </prism:PrismApplication>

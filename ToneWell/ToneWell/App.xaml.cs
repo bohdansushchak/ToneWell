@@ -23,13 +23,15 @@ namespace ToneWell
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("CustomNavigationPage/QueuePage"); //NavigationPage/
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<CustomNavigationPage>();
+            containerRegistry.RegisterForNavigation<QueuePage, QueuePageViewModel>();
+            containerRegistry.RegisterForNavigation<PlayerPage, PlayerPageViewModel>();
+
         }
     }
 }

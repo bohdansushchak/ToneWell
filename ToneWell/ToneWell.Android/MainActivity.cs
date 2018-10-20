@@ -17,7 +17,13 @@ namespace ToneWell.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
+
             LoadApplication(new App(new AndroidInitializer()));
+
+            
         }
     }
 

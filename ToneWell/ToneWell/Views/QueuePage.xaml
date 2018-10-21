@@ -9,8 +9,9 @@
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
 
         <Label Text="Up Next" FontSize="Large" />
-        
-        
+        <Button Text="Get new list" Command="{Binding ReorderListCommand}"/>
+
+        <local:TrackListView Items="{Binding Tracks, Mode=TwoWay}"/>
 
     </StackLayout>
 

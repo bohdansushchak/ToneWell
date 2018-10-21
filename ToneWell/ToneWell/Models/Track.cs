@@ -5,17 +5,28 @@ namespace ToneWell.Models
 {
     public class Track : INotifyPropertyChanged
     {
+        private String imagePath;
         private String title;
         private String artist;
         private int duration;
 
+
+        public String ImagePath
+        {
+            get { return imagePath; }
+            set
+            {
+                imagePath = value;
+                OnPropertyChanged("imagePath");
+            }
+        }
         public String Title
         {
             get { return title; }
             set
             {
                 title = value;
-                OnPropertyChanged("Title");
+                OnPropertyChanged("title");
             }
         }
 
@@ -25,7 +36,7 @@ namespace ToneWell.Models
             set
             {
                 artist = value;
-                OnPropertyChanged("Artist");
+                OnPropertyChanged("artist");
             }
         }
 
@@ -35,7 +46,7 @@ namespace ToneWell.Models
             set
             {
                 duration = value;
-                OnPropertyChanged("Duration");
+                OnPropertyChanged("duration");
             }
         }
 

@@ -23,7 +23,6 @@ namespace ToneWell.Droid
 
             LoadApplication(new App(new AndroidInitializer()));
 
-            
         }
     }
 

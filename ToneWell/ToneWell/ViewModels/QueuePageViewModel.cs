@@ -1,6 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using Syncfusion.ListView.XForms;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ToneWell.Models;
@@ -14,12 +13,27 @@ namespace ToneWell.ViewModels
         {
             Title = "Queue";
 
-            reorderListCommand = new DelegateCommand<ItemDraggingEventArgs>(reorderList);
+            reorderListCommand = new DelegateCommand(reorderList);
+
+
+            Tracks = new ObservableCollection<Track>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                Tracks.Add(new Track
+                {
+                    Artist = "some artist " + i,
+                    Title = "some title " + i,
+                });
+            }
         }
 
-
-        private void reorderList(ItemDraggingEventArgs e)
+        private void reorderList()
         {
+            foreach (var track in Tracks)
+            {
+                System.Diagnostics.Debug.WriteLine(track.Title);
+            }
 
         }
 

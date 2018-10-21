@@ -24,6 +24,7 @@ namespace ToneWell.ViewModels
                 {
                     Artist = "some artist " + i,
                     Title = "some title " + i,
+                    ImagePath = "thumbnail.png",
                 });
             }
         }

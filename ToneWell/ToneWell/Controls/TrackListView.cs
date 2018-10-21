@@ -1,10 +1,8 @@
 ﻿using FFImageLoading.Forms;
 using FFImageLoading.Svg.Forms;
-using Prism.Commands;
 using Syncfusion.ListView.XForms;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using ToneWell.Models;
 using Xamarin.Forms;
 
@@ -24,12 +22,13 @@ namespace ToneWell.Controls
             rootListView.DragStartMode = DragStartMode.OnDragIndicator;
             rootListView.AutoFitMode = AutoFitMode.Height;
             rootListView.DragDropController.UpdateSource = true;
-            
+
             dataTemplate = new DataTemplate(() =>
             {
                 var _root = new Grid()
                 {
                     Padding = 0,
+                    Margin = new Thickness(10, 5, 10, 5),
                     ColumnDefinitions = new ColumnDefinitionCollection()
                     {
                         new ColumnDefinition() { Width = GridLength.Auto },
@@ -40,42 +39,58 @@ namespace ToneWell.Controls
 
                 var _trackImage = new CachedImage()
                 {
-                    HeightRequest = 50d,
-                    WidthRequest = 50d,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    HeightRequest = 60d,
+                    WidthRequest = 60d,
                     Aspect = Aspect.AspectFill,
-
+                    LoadingPlaceholder = "thumbnail.png",
+                    ErrorPlaceholder = "thumbnail.png",
+                    Source = "http://loremflickr.com/600/600/nature?filename=simple.jpg"
                 };
 
-                _trackImage.SetBinding(CachedImage.SourceProperty, new Binding("ImagePath"));
+                //_trackImage.SetBinding(CachedImage.SourceProperty, new Binding("ImagePath"));
 
                 var _labelRoot = new StackLayout
                 {
                     VerticalOptions = LayoutOptions.FillAndExpand,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     Orientation = StackOrientation.Vertical,
+                    Spacing = 0,
                 };
 
                 var _labelTitle = new Label
                 {
                     FontSize = 14,
                     TextColor = Color.FromHex("#414344"),
+                    Margin = new Thickness(5, 0, 5, 0),
                 };
+
                 _labelTitle.SetBinding(Label.TextProperty, new Binding("Title"));
 
                 var _labelSubTitle = new Label()
                 {
                     FontSize = 12,
                     TextColor = Color.FromHex("#AAAFB3"),
+                    Margin = new Thickness(5, 0, 5, 0),
                 };
+
                 _labelSubTitle.SetBinding(Label.TextProperty, new Binding("Artist"));
 
                 var dragIndicatorView = new DragIndicatorView()
                 {
                     ListView = rootListView,
+                    Margin = new Thickness(5, 5, 5, 5),
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center,
                     Content = new CachedImage
                     {
+                        HeightRequest = 35d,
+                        WidthRequest = 35d,
                         Source = SvgImageSource.FromFile("more.svg"),
-                        VerticalOptions = LayoutOptions.FillAndExpand
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center,
+                        Aspect = Aspect.Fill,
                     },
                 };
 

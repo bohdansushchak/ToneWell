@@ -9,7 +9,6 @@ namespace ToneWell.ViewModels
 {
 	public class PlayerPageViewModel : ViewModelBase
     {
-
         public PlayerPageViewModel(INavigationService navigationService)
            : base(navigationService)
         {

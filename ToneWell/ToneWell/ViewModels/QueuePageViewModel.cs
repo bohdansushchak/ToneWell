@@ -8,13 +8,17 @@ namespace ToneWell.ViewModels
 {
     public class QueuePageViewModel : ViewModelBase
     {
+        protected INavigationService navigationService;
+
         public QueuePageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
+
+            this.navigationService = navigationService;
+
             Title = "Queue";
 
-            reorderListCommand = new DelegateCommand(reorderList);
-
+            tapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
 
             Tracks = new ObservableCollection<Track>();
 
@@ -29,20 +33,21 @@ namespace ToneWell.ViewModels
             }
         }
 
-        private void reorderList()
+        private void tapItem(Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            foreach (var track in Tracks)
-            {
-                System.Diagnostics.Debug.WriteLine(track.Title);
-            }
+            var item = (Track)e.ItemData;
+            System.Diagnostics.Debug.WriteLine(item.Title);
 
+            var p = new NavigationParameters();
+
+            navigationService.NavigateAsync("PlayerPage");
         }
 
-        private ICommand reorderListCommand;
-        public ICommand ReorderListCommand
+        private ICommand tapItemCommand;
+        public ICommand TapItemCommand
         {
-            get { return reorderListCommand; }
-            set { reorderListCommand = value; }
+            get { return tapItemCommand; }
+            set { tapItemCommand = value; }
         }
 
         private ObservableCollection<Track> tracks;

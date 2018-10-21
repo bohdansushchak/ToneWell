@@ -3,6 +3,7 @@ using FFImageLoading.Svg.Forms;
 using Syncfusion.ListView.XForms;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using ToneWell.Models;
 using Xamarin.Forms;
 
@@ -22,6 +23,7 @@ namespace ToneWell.Controls
             rootListView.DragStartMode = DragStartMode.OnDragIndicator;
             rootListView.AutoFitMode = AutoFitMode.Height;
             rootListView.DragDropController.UpdateSource = true;
+            rootListView.ItemTapped += ItemTapped;
 
             dataTemplate = new DataTemplate(() =>
             {
@@ -108,6 +110,20 @@ namespace ToneWell.Controls
             rootListView.ItemTemplate = dataTemplate;
 
             Content = rootListView;
+        }
+
+        private void ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        {
+            if (TapItemCommand.CanExecute(e))
+                TapItemCommand.Execute(e);
+        }
+
+        public static readonly BindableProperty TapItemCommandProperty = BindableProperty.Create(nameof(TapItemCommand), typeof(ICommand), typeof(TrackListView), default(ICommand));
+
+        public ICommand TapItemCommand
+        {
+            get { return (ICommand)GetValue(TapItemCommandProperty); }
+            set { SetValue(TapItemCommandProperty, value); }
         }
 
         public static readonly BindableProperty ItemsProperty = BindableProperty.Create(nameof(Items), typeof(ICollection<Track>), typeof(TrackListView), default(ICollection<Track>));

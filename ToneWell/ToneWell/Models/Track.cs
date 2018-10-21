@@ -10,7 +10,6 @@ namespace ToneWell.Models
         private String artist;
         private int duration;
 
-
         public String ImagePath
         {
             get { return imagePath; }

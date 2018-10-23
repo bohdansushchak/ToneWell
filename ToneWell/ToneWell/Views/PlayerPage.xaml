@@ -12,9 +12,9 @@
 
     <StackLayout Margin="0" BindingContext="{Binding Track}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-        <ffimageloading:CachedImage Source="{Binding ImagePath}" HeightRequest="270" WidthRequest="270" Margin="20, 10, 20, 10"/>
+        <ffimageloading:CachedImage Source="{Binding ImagePath}" HeightRequest="270" WidthRequest="270" Margin="20, 20, 20, 10"/>
 
-        <Grid Margin="10,20,10,10" HorizontalOptions="Center">
+        <Grid Margin="10,30,10,10" HorizontalOptions="Center">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -51,6 +51,23 @@
 
             <Label FontSize="12" Text="{Binding LeftProgressSec}" TextColor="{x:Static helper:Colors.l_TextSubItem}" Grid.Column="2"/>
             
+        </Grid>
+
+        <Grid Margin="20,30,20,10" HorizontalOptions="FillAndExpand" ColumnSpacing="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="2.1*"/>
+                <ColumnDefinition Width="3.4*"/>
+                <ColumnDefinition Width="2.1*"/>
+                <ColumnDefinition Width="1.2*"/>
+            </Grid.ColumnDefinitions>
+
+            <control:ImageButton Margin="5,0,5,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_shuffle_on.svg" IconSize="24" Grid.Column="0"/>
+            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_previous.svg" IconSize="53" Grid.Column="1" />
+            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_play.svg" IconSize="90" Grid.Column="2"/>
+            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_next.svg" IconSize="53" Grid.Column="3"/>
+            <control:ImageButton Margin="5,0,5,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_repeat_on.svg" IconSize="24" Grid.Column="4"/>
         </Grid>
     </StackLayout>
 

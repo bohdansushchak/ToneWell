@@ -31,5 +31,12 @@ namespace ToneWell.ViewModels
         }
 
         public ICommand MoreCommand { get; set; }
+        public ICommand LikeCommand { get; set; }
+        public ICommand PlayCommand { get; set; }
+        public ICommand RepeatCommand { get; set; }
+        public ICommand ShuffleCommand { get; set; }
+        public ICommand NextCommand { get; set; }
+        public ICommand PreviousCommand { get; set; }
+
     }
 }

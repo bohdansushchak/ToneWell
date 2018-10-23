@@ -8,6 +8,9 @@
         <ResourceDictionary>
 
             <Color x:Key="BackgroundColor">#ffffff</Color>
+
+            <Color x:Key="TextColorPrimary">#414344</Color>
+            <Color x:Key="TextColorSubItem">#AAAFB3</Color>
             
         </ResourceDictionary>
 

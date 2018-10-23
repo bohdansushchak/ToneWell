@@ -9,6 +9,28 @@ namespace ToneWell.Models
         private String title;
         private String artist;
         private int duration;
+        private string progressSec;
+        private string leftProgressSec;
+
+        public String ProgressSec
+        {
+            get { return progressSec; }
+            set
+            {
+                progressSec = value;
+                OnPropertyChanged("progressSec");
+            }
+        }
+
+        public String LeftProgressSec
+        {
+            get { return leftProgressSec; }
+            set
+            {
+                leftProgressSec = value;
+                OnPropertyChanged("leftProgressSec");
+            }
+        }
 
         public String ImagePath
         {

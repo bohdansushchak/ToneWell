@@ -11,6 +11,40 @@ namespace ToneWell.Models
         private int duration;
         private string progressSec;
         private string leftProgressSec;
+        private bool repeat;
+        private bool shuffle;
+        private bool isLiked;
+
+
+
+        public bool IsLiked
+        {
+            get { return isLiked; }
+            set
+            {
+                isLiked = value;
+                OnPropertyChanged("isLiked");
+            }
+        }
+
+        public bool Repeat
+        {
+            get { return repeat; }
+            set {
+                repeat = value;
+                OnPropertyChanged("repeat");
+            }
+        }
+
+        public bool Shuffle
+        {
+            get { return shuffle; }
+            set
+            {
+                shuffle = value;
+                OnPropertyChanged("shuffle");
+            }
+        }
 
         public String ProgressSec
         {

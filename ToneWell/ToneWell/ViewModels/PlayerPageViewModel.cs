@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using Prism.Commands;
+using Prism.Navigation;
 using System.Windows.Input;
 using ToneWell.Models;
 
@@ -17,9 +18,18 @@ namespace ToneWell.ViewModels
                 Artist = "Artist",
                 ImagePath = "http://loremflickr.com/600/600/nature?filename=simple.jpg",
                 ProgressSec = "1:21",
-                LeftProgressSec = "2:04"
+                LeftProgressSec = "2:04",
+                Repeat = false,
+                Shuffle = false,
             };
 
+            MoreCommand = new DelegateCommand(moreAction);
+            LikeCommand = new DelegateCommand(likeAction);
+            PlayCommand = new DelegateCommand(playAction);
+            RepeatCommand = new DelegateCommand(repeatAction);
+            ShuffleCommand = new DelegateCommand(shuffleAction);
+            NextCommand = new DelegateCommand(() => { });
+            PreviousCommand = new DelegateCommand(() => { });
         }
 
 
@@ -28,6 +38,32 @@ namespace ToneWell.ViewModels
         {
             get { return track; }
             set { track = value; }
+        }
+
+
+        private void moreAction()
+        {
+
+        } 
+
+        private void likeAction()
+        {
+
+        }
+
+        private void playAction()
+        {
+
+        }
+
+        private void repeatAction()
+        {
+
+        }
+
+        private void shuffleAction()
+        {
+
         }
 
         public ICommand MoreCommand { get; set; }

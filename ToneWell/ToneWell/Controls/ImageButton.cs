@@ -1,15 +1,15 @@
 ﻿using FFImageLoading.Forms;
 using FFImageLoading.Svg.Forms;
-using Prism.Commands;
 using System;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ToneWell.Controls
 {
     public class ImageButton : ContentView
     {
-        readonly CachedImage _image;
+        protected readonly CachedImage _image;
 
         public ImageButton()
         {
@@ -63,15 +63,14 @@ namespace ToneWell.Controls
             set { SetValue(IconHeightProperty, value); }
         }
 
-        
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(DelegateCommand), typeof(ImageButton), default(DelegateCommand));
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ImageButton), default(ICommand));
 
-        public DelegateCommand Command
+        public ICommand Command
         {
-            get { return (DelegateCommand)GetValue(CommandProperty); }
+            get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
-        
+
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(ImageButton), default(object));
 
         public object CommandParameter
@@ -121,7 +120,6 @@ namespace ToneWell.Controls
             {
                 (GestureRecognizers.First() as TapGestureRecognizer).CommandParameter = CommandParameter;
             }
-           
         }
     }
 }

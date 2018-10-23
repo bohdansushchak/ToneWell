@@ -40,10 +40,6 @@ namespace ToneWell.ViewModels
 
             var p = new NavigationParameters();
 
-
-
-
-
             navigationService.NavigateAsync("PlayerPage", p);
         }
 

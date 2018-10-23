@@ -22,7 +22,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Switch VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0" Grid.Row="0"/>
+            <control:ToggleButton VerticalOptions="Center" HorizontalOptions="Center" IconOn="btn_like_on.svg" IconOff="btn_like_off.svg"
+                                  State="{Binding IsLiked}" Grid.Column="0" Grid.Row="0" />
 
             <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" Grid.Column="1" Grid.Row="0" Orientation="Vertical">
 
@@ -63,11 +64,23 @@
                 <ColumnDefinition Width="1.2*"/>
             </Grid.ColumnDefinitions>
 
-            <control:ImageButton Margin="5,0,5,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_shuffle_on.svg" IconSize="24" Grid.Column="0"/>
-            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_previous.svg" IconSize="53" Grid.Column="1" />
-            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_play.svg" IconSize="90" Grid.Column="2"/>
-            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_next.svg" IconSize="53" Grid.Column="3"/>
-            <control:ImageButton Margin="5,0,5,0" VerticalOptions="Center" HorizontalOptions="Center" Icon="btn_repeat_on.svg" IconSize="24" Grid.Column="4"/>
+            <control:ToggleButton Margin="5,0,5,0" VerticalOptions="Center"
+                                  HorizontalOptions="Center"
+                                  Command="{Binding ShuffleCommand}" 
+                                  IconOn="btn_shuffle_on.svg" 
+                                  IconOff="btn_shuffle_off.svg" 
+                                  IconSize="24" Grid.Column="0"
+                                  State="{Binding Shuffle, Mode=TwoWay}"
+                                  />
+            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PreviousCommand}" Icon="btn_previous.svg" IconSize="53" Grid.Column="1" />
+            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PlayCommand}" Icon="btn_play.svg" IconSize="90" Grid.Column="2"/>
+            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding NextCommand}" Icon="btn_next.svg" IconSize="53" Grid.Column="3"/>
+            
+            <control:ToggleButton Margin="5,0,5,0" 
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="Center" 
+                                  Command="{Binding RepeatCommand}" 
+                                  IconOn="btn_repeat_on.svg" IconOff="btn_repeat_off.svg"  IconSize="24" Grid.Column="4" State="{Binding Repeat, Mode=TwoWay}"/>
         </Grid>
     </StackLayout>
 

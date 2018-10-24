@@ -64,7 +64,9 @@
                 <ColumnDefinition Width="1.2*"/>
             </Grid.ColumnDefinitions>
 
-            <control:ToggleButton Margin="5,0,5,0" VerticalOptions="Center"
+            <control:ToggleButton Margin="5,0,5,0"
+                                  BindingContext="{Binding Track}"
+                                  VerticalOptions="Center"
                                   HorizontalOptions="Center"
                                   Command="{Binding ShuffleCommand}" 
                                   IconOn="btn_shuffle_on.svg" 
@@ -72,6 +74,7 @@
                                   IconSize="24" Grid.Column="0"
                                   State="{Binding Shuffle, Mode=TwoWay}"
                                   />
+            
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PreviousCommand}" Icon="btn_previous.svg" IconSize="53" Grid.Column="1" />
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PlayCommand}" Icon="btn_play.svg" IconSize="90" Grid.Column="2"/>
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding NextCommand}" Icon="btn_next.svg" IconSize="53" Grid.Column="3"/>

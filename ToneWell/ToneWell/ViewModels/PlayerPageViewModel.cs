@@ -2,15 +2,19 @@
 using Prism.Navigation;
 using System.Windows.Input;
 using ToneWell.Models;
+using ToneWell.Services;
 
 namespace ToneWell.ViewModels
 {
     public class PlayerPageViewModel : ViewModelBase
     {
+        protected PlayerService playerService;
+
         public PlayerPageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
             Title = "Player Page";
+            playerService = PlayerService.Instance;
 
             Track = new Track()
             {
@@ -18,9 +22,7 @@ namespace ToneWell.ViewModels
                 Artist = "Artist",
                 ImagePath = "http://loremflickr.com/600/600/nature?filename=simple.jpg",
                 ProgressSec = "1:21",
-                LeftProgressSec = "2:04",
-                Repeat = false,
-                Shuffle = false,
+                LeftProgressSec = "-2:04",
             };
 
             MoreCommand = new DelegateCommand(moreAction);

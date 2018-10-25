@@ -32,8 +32,8 @@ namespace ToneWell.ViewModels
             ShuffleCommand = new DelegateCommand(shuffleAction);
             NextCommand = new DelegateCommand(() => { });
             PreviousCommand = new DelegateCommand(() => { });
+            
         }
-
 
         private Track track;
         public Track Track
@@ -41,7 +41,6 @@ namespace ToneWell.ViewModels
             get { return track; }
             set { track = value; }
         }
-
 
         private void moreAction()
         {

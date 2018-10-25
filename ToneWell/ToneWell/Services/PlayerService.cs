@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
+using System.IO;
 using ToneWell.Models;
 
 namespace ToneWell.Services
@@ -15,6 +16,9 @@ namespace ToneWell.Services
         private PlayerService()
         {
             Tracks = new List<Track>();
+
+
+            //var fof = ((Prism.PrismApplicationBase)App.Current).Container.Resolve();
 
             FindAllMusicFiles();
         }
@@ -47,12 +51,34 @@ namespace ToneWell.Services
             get { return shuffleTrakcs; }
             set { shuffleTrakcs = value; }
         }
-        
+
         private void FindAllMusicFiles()
         {
             if (Tracks == null)
                 Tracks = new List<Track>();
 
+            try
+            {
+
+               
+                //string[] files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "*.mp3");
+
+                string[] di = Directory.GetDirectories("/data/user/0");
+
+                System.Diagnostics.Debug.WriteLine(di.ToString());
+                System.Diagnostics.Debug.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+
+                /*files.ToList().ConvertAll(file => new Track()
+                {
+                    FilePath = file,
+                });
+                */
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+            /*
             for (int i = 0; i < 10; i++)
             {
                 Tracks.Add(new Track
@@ -62,8 +88,10 @@ namespace ToneWell.Services
                     ImagePath = "thumbnail.png",
                 });
             }
+            */
         }
 
         public List<Track> Tracks { get; set; }
+
     }
 }

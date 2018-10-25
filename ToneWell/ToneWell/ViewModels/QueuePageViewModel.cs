@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using ToneWell.Models;
 using ToneWell.Services;
@@ -12,7 +13,7 @@ namespace ToneWell.ViewModels
         protected INavigationService navigationService;
         protected PlayerService playerService;
 
-        public QueuePageViewModel(INavigationService navigationService)
+        public QueuePageViewModel(INavigationService navigationService, IFileService fileService)
            : base(navigationService)
         {
             Title = "Queue";
@@ -21,6 +22,11 @@ namespace ToneWell.ViewModels
             this.playerService = PlayerService.Instance;
 
             tapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
+
+            var files = fileService.FindFilesMp3().ToList();
+
+            foreach (var file in files)
+                System.Diagnostics.Debug.WriteLine(file.ToString());
 
             Tracks = new ObservableCollection<Track>(playerService.Tracks);
         }

@@ -5,9 +5,10 @@ namespace ToneWell.Models
 {
     public class Track : INotifyPropertyChanged
     {
-        private String imagePath;
-        private String title;
-        private String artist;
+        private string imagePath;
+        private string title;
+        private string artist;
+        private string filePath;
         private int duration;
         private string progressSec;
         private string leftProgressSec;
@@ -23,7 +24,17 @@ namespace ToneWell.Models
             }
         }
 
-        public String ProgressSec
+        public string FilePath
+        {
+            get { return filePath; }
+            set
+            {
+                filePath = value;
+                OnPropertyChanged("filePath");
+            }
+        }
+
+        public string ProgressSec
         {
             get { return progressSec; }
             set
@@ -33,7 +44,7 @@ namespace ToneWell.Models
             }
         }
 
-        public String LeftProgressSec
+        public string LeftProgressSec
         {
             get { return leftProgressSec; }
             set
@@ -43,7 +54,7 @@ namespace ToneWell.Models
             }
         }
 
-        public String ImagePath
+        public string ImagePath
         {
             get { return imagePath; }
             set
@@ -52,7 +63,7 @@ namespace ToneWell.Models
                 OnPropertyChanged("imagePath");
             }
         }
-        public String Title
+        public string Title
         {
             get { return title; }
             set
@@ -62,7 +73,7 @@ namespace ToneWell.Models
             }
         }
 
-        public String Artist
+        public string Artist
         {
             get { return artist; }
             set

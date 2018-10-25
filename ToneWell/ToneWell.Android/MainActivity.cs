@@ -1,8 +1,11 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.Media;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
+using ToneWell.Droid.Services;
+using ToneWell.Services;
 
 namespace ToneWell.Droid
 {
@@ -30,7 +33,8 @@ namespace ToneWell.Droid
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations
+            containerRegistry.Register<IFileService, FileService>();
+            containerRegistry.Register<IMyMediaPlayer, MyMediaPlayer>();
         }
     }
 }

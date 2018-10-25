@@ -2,7 +2,6 @@
 using Prism.Ioc;
 using ToneWell.ViewModels;
 using ToneWell.Views;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]

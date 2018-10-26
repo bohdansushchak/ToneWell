@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Widget;
 using Prism;
 using Prism.Ioc;
 using System.Threading.Tasks;
@@ -13,8 +14,14 @@ namespace ToneWell.Droid
     [Activity(Label = "ToneWell", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+        readonly string[] PermissionsStorage = { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };
+
+        const int RequestLocationId = 0;
+
+        protected async override void OnCreate(Bundle bundle)
         {
+            await TryToGetPermissions();
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -29,93 +36,84 @@ namespace ToneWell.Droid
 
         }
 
-        readonly string[] PermissionsLocation = { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation };
+        #region RuntimePermissions
 
-        const int RequestLocationId = 0;
-
-
-        async Task TryGetLocationAsync()
+        async Task TryToGetPermissions()
         {
-            if ((int)Build.VERSION.SdkInt < 23)
+            if ((int)Build.VERSION.SdkInt >= 23)
             {
-                //await GetLocationAsync();
+                await GetPermissionsAsync();
                 return;
             }
-
-            // await GetLocationPermissionAsync();
         }
-        /*
-        async Task GetLocationPermissionAsync()
+
+
+        async Task GetPermissionsAsync()
         {
-            //Check to see if any permission in our group is available, if one, then all are
-            const string permission = Manifest.Permission.AccessFineLocation;
-            if (CheckSelfPermission(permission) == (int)Permission.Granted)
+            const string permission = Manifest.Permission.ReadExternalStorage;
+
+            if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
             {
-                //await GetLocationAsync();
+                //TODO change the message to show the permissions name
+                Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
                 return;
             }
 
-            //need to request permission
+            /*
             if (ShouldShowRequestPermissionRationale(permission))
             {
-                //Explain to the user why we need to read the contacts
-                Snackbar.Make(layout, "Location access is required to show coffee shops nearby.", Snackbar.LengthIndefinite)
-                        .SetAction("OK", v => RequestPermissions(PermissionsLocation, RequestLocationId))
-                        .Show();
+                //set alert for executing the task
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.SetTitle("Permissions Needed");
+                alert.SetMessage("The application need special permissions to continue");
+                alert.SetPositiveButton("Request Permissions", (senderAlert, args) =>
+                {
+                    RequestPermissions(PermissionsStorage, RequestLocationId);
+                });
+
+                alert.SetNegativeButton("Cancel", (senderAlert, args) =>
+                {
+                    Toast.MakeText(this, "Cancelled!", ToastLength.Short).Show();
+                });
+
+                Dialog dialog = alert.Create();
+                dialog.Show();
+                
+
+                RequestPermissions(PermissionsStorage, RequestLocationId);
+
                 return;
             }
-            //Finally request permissions with the list of permissions and Id
-            RequestPermissions(PermissionsLocation, RequestLocationId);
+            */
+
+            RequestPermissions(PermissionsStorage, RequestLocationId);
+
         }
-        /*
-        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             switch (requestCode)
             {
                 case RequestLocationId:
                     {
-                        if (grantResults[0] == Permission.Granted)
+                        if (grantResults[0] == (int)Android.Content.PM.Permission.Granted)
                         {
-                            //Permission granted
-                            var snack = Snackbar.Make(, "Location permission is available, getting lat/long.", Snackbar.LengthShort);
-                            snack.Show();
+                            Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
 
-                            await GetLocationAsync();
                         }
                         else
                         {
                             //Permission Denied :(
-                            //Disabling location functionality
-                            var snack = Snackbar.Make(layout, "Location permission is denied.", Snackbar.LengthShort);
-                            snack.Show();
+                            Toast.MakeText(this, "Special permissions denied", ToastLength.Short).Show();
+
                         }
                     }
                     break;
             }
+            //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        *//*
-        async Task GetLocationCompatAsync()
-        {
-            const string permission = Manifest.Permission.AccessFineLocation;
-            if (ContextCompat.CheckSelfPermission(this, permission) == (int)Permission.Granted)
-            {
-                await GetLocationAsync();
-                return;
-            }
 
-            if (ActivityCompat.ShouldShowRequestPermissionRationale(this, permission))
-            {
-                //Explain to the user why we need to read the contacts
-                Snackbar.Make(layout, "Location access is required to show coffee shops nearby.", Snackbar.LengthIndefinite)
-                        .SetAction("OK", v => ActivityCompat.RequestPermissions(this, PermissionsLocation, RequestLocationId))
-                        .Show();
+        #endregion
 
-                return;
-            }
-
-            ActivityCompat.RequestPermissions(this, PermissionsLocation, RequestLocationId);
-        }
-        */
     }
 
     public class AndroidInitializer : IPlatformInitializer

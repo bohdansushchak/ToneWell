@@ -61,34 +61,13 @@ namespace ToneWell.Services
             {
 
                
-                //string[] files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "*.mp3");
 
-                string[] di = Directory.GetDirectories("/data/user/0");
-
-                System.Diagnostics.Debug.WriteLine(di.ToString());
-                System.Diagnostics.Debug.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
-
-                /*files.ToList().ConvertAll(file => new Track()
-                {
-                    FilePath = file,
-                });
-                */
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            /*
-            for (int i = 0; i < 10; i++)
-            {
-                Tracks.Add(new Track
-                {
-                    Artist = "some artist " + i,
-                    Title = "some title " + i,
-                    ImagePath = "thumbnail.png",
-                });
-            }
-            */
+
         }
 
         public List<Track> Tracks { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using ToneWell.Models;
@@ -23,12 +24,14 @@ namespace ToneWell.ViewModels
 
             tapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
 
-            var files = fileService.FindFilesMp3().ToList();
+            var files = fileService.FindAllMp3Files();
 
-            foreach (var file in files)
-                System.Diagnostics.Debug.WriteLine(file.ToString());
-
-            Tracks = new ObservableCollection<Track>(playerService.Tracks);
+            Tracks = new ObservableCollection<Track>(files.ConvertAll(file => new Track
+            {
+                Title = file.Split('/').Last().Split('.').First(),
+                FilePath = file,
+                ImagePath = file,
+            }));
         }
 
         private void tapItem(Syncfusion.ListView.XForms.ItemTappedEventArgs e)

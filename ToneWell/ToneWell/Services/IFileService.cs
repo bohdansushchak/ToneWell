@@ -6,6 +6,6 @@ namespace ToneWell.Services
 {
     public interface IFileService
     {
-        string[] FindFilesMp3();
+        List<string> FindAllMp3Files();
     }
 }

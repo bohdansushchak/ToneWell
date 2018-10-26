@@ -1,26 +1,56 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using ToneWell.Services;
 
 namespace ToneWell.Droid.Services
 {
     public class FileService : IFileService
     {
-        public string[] FindFilesMp3()
+        public List<string> FindAllMp3Files()
         {
+            var path = "/storage/";
 
+            List<string> directories = Directory.GetDirectories(path).ToList();
+            List<string> files = Directory.GetFiles(path, "*.mp3").ToList();
 
-            
-            var path = global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            for (int i = 0; i < directories.Count; i++)
+            {
+                try
+                {
+                    var dir = directories[i] + "/";
 
-            //string[] files = Directory.GetFiles(path, "*.mp3");
+                    var newDir = Directory.GetDirectories(dir);
 
-            System.Diagnostics.Debug.WriteLine(path);
+                    if (newDir != null)
+                        if (newDir.Count() > 0)
+                            directories.AddRange(newDir);
 
-            string[] dire = Directory.GetDirectories(path);
-            foreach (var dir in dire)
+                    var newFiles = Directory.GetFiles(dir, "*.mp3");
+
+                    if (newFiles != null)
+                        if (newFiles.Count() > 0)
+                            files.AddRange(newFiles);
+                }
+                catch (UnauthorizedAccessException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
+            }
+
+            foreach (var dir in files)
                 System.Diagnostics.Debug.WriteLine(dir);
 
-            return null;
+            return files;
         }
     }
 }
+
+/*
+        Using this: global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath.ToString();
+        Gives me this: /storage/emulated/0/
+        
+        Using this: Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
+        Gives me this: /data/data/my_app_full_name/files/
+ */

@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
+using DryIoc;
 using Prism;
 using Prism.Ioc;
 using System.Threading.Tasks;
@@ -29,7 +30,6 @@ namespace ToneWell.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
 
             LoadApplication(new App(new AndroidInitializer()));
@@ -47,14 +47,12 @@ namespace ToneWell.Droid
             }
         }
 
-
         async Task GetPermissionsAsync()
         {
             const string permission = Manifest.Permission.ReadExternalStorage;
 
             if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
             {
-                //TODO change the message to show the permissions name
                 Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
                 return;
             }
@@ -98,13 +96,10 @@ namespace ToneWell.Droid
                         if (grantResults[0] == (int)Android.Content.PM.Permission.Granted)
                         {
                             Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
-
                         }
                         else
                         {
-                            //Permission Denied :(
                             Toast.MakeText(this, "Special permissions denied", ToastLength.Short).Show();
-
                         }
                     }
                     break;
@@ -113,15 +108,19 @@ namespace ToneWell.Droid
         }
 
         #endregion
-
     }
 
     public class AndroidInitializer : IPlatformInitializer
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+
             containerRegistry.Register<IFileService, FileService>();
             containerRegistry.Register<IMyMediaPlayer, MyMediaPlayer>();
+
+            App.Container.Register<IFileService, FileService>();
+            App.Container.Register<IMyMediaPlayer, MyMediaPlayer>();
+
         }
     }
 }

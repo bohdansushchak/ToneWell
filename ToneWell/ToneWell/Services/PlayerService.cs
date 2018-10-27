@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DryIoc;
+using System;
 using System.Collections.Generic;
-
-using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using ToneWell.Models;
 
 namespace ToneWell.Services
@@ -10,17 +11,22 @@ namespace ToneWell.Services
     {
         private static volatile PlayerService instance;
         private static object syncRoot = new Object();
+
         private bool repeatTracks;
         private bool shuffleTrakcs;
 
+        private IFileService fileService;
+        private IMyMediaPlayer mediaPlayer;
+
+        public List<Track> Tracks { get; set; }
+
         private PlayerService()
-        {
+        {            
             Tracks = new List<Track>();
 
+            fileService = App.Container.Resolve<IFileService>();
+            mediaPlayer = App.Container.Resolve<IMyMediaPlayer>();
 
-            //var fof = ((Prism.PrismApplicationBase)App.Current).Container.Resolve();
-
-            FindAllMusicFiles();
         }
 
         public static PlayerService Instance
@@ -52,25 +58,18 @@ namespace ToneWell.Services
             set { shuffleTrakcs = value; }
         }
 
-        private void FindAllMusicFiles()
+        public List<Track> InitializeTracks()
         {
-            if (Tracks == null)
-                Tracks = new List<Track>();
+            var filePaths = fileService.FindAllMp3Files();
 
-            try
+            var tracks = filePaths.ConvertAll(file => new Track
             {
+                Title = file.Split('/').Last().Split('.').First(),
+                FilePath = file,
+                ImagePath = file,
+            });
 
-               
-
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-
+            return tracks;
         }
-
-        public List<Track> Tracks { get; set; }
-
     }
 }

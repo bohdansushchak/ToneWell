@@ -11,21 +11,19 @@ namespace ToneWell.Droid.Services
 
         public MyMediaPlayer()
         {
-            player = new MediaPlayer(); 
+            player = new MediaPlayer();
         }
 
         public void Pause()
         {
-            if (player == null)
-                return;
-
             if (player.IsPlaying)
                 player.Pause();
         }
 
         public void Resume()
         {
-            throw new System.NotImplementedException();
+            if (!player.IsPlaying)
+                player.Start();
         }
 
         public void StartPlayer(string filePath)

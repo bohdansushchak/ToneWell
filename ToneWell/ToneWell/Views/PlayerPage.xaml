@@ -73,8 +73,12 @@
                                   State="{Binding Shuffle, Mode=TwoWay}" />
             
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PreviousCommand}" Icon="btn_previous.svg" IconSize="53" Grid.Column="1" />
-            <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PlayCommand}" Icon="btn_play.svg" IconSize="90" Grid.Column="2"/>
-            <!--<control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PauseCommand}" Icon="btn_pause.svg" IconSize="90" Grid.Column="2"/>-->
+            <control:ToggleButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PlayOrPauseCommand}" 
+                                  IconOn="btn_play.svg" 
+                                  IconOff="btn_pause.svg" 
+                                  IconSize="90"
+                                  State="{Binding Path=playerService.IsPlaying}"
+                                  Grid.Column="2"/>
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding NextCommand}" Icon="btn_next.svg" IconSize="53" Grid.Column="3"/>
             
             <control:ToggleButton Margin="5,0,5,0" 

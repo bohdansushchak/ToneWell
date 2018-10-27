@@ -2,7 +2,6 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Widget;
 using DryIoc;
 using Prism;
 using Prism.Ioc;
@@ -53,7 +52,6 @@ namespace ToneWell.Droid
 
             if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
             {
-                Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
                 return;
             }
 
@@ -95,11 +93,11 @@ namespace ToneWell.Droid
                     {
                         if (grantResults[0] == (int)Android.Content.PM.Permission.Granted)
                         {
-                            Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
+                            //Toast.MakeText(this, "Special permissions granted", ToastLength.Short).Show();
                         }
                         else
                         {
-                            Toast.MakeText(this, "Special permissions denied", ToastLength.Short).Show();
+                            //Toast.MakeText(this, "Special permissions denied", ToastLength.Short).Show();
                         }
                     }
                     break;

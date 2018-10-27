@@ -17,6 +17,14 @@ namespace ToneWell.Services
         private IFileService fileService;
         private IMyMediaPlayer mediaPlayer;
 
+        public bool IsPlaying
+        {
+            get
+            {
+                return mediaPlayer.IsPlaying;
+            }
+        }
+
         public List<Track> Tracks { get; set; }
 
         public Track CurrentTrack { get; set; }
@@ -63,7 +71,7 @@ namespace ToneWell.Services
 
         public void Play(Track track)
         {
-            if(CurrentTrack.Equals(track))
+            if (CurrentTrack.Equals(track))
             {
                 if (!mediaPlayer.IsPlaying)
                     mediaPlayer.Resume();
@@ -79,8 +87,7 @@ namespace ToneWell.Services
 
         public void Pause()
         {
-            if (mediaPlayer.IsPlaying)
-                mediaPlayer.Pause();
+            mediaPlayer.Pause();
         }
 
         public List<Track> initializeTracks()

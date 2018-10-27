@@ -45,14 +45,15 @@ namespace ToneWell.ViewModels
         public ICommand TapItemCommand { get; set; }
         public ICommand GoCommand { get; set; }
 
-        private ObservableCollection<Track> tracks;
+
+        private ObservableCollection<Track> _tracks;
         public ObservableCollection<Track> Tracks
         {
-            get { return tracks; }
+            get { return _tracks; }
             set
             {
-                tracks = value;
-                OnPropertyChanged("tracks");
+                _tracks = value;
+                OnPropertyChanged("Tracks");
             }
         }
     }

@@ -18,9 +18,7 @@ namespace ToneWell.ViewModels
 
             MoreCommand = new DelegateCommand(moreAction);
             LikeCommand = new DelegateCommand(likeAction);
-
             PlayCommand = new DelegateCommand(playAction);
-
             RepeatCommand = new DelegateCommand(repeatAction);
             ShuffleCommand = new DelegateCommand(shuffleAction);
             NextCommand = new DelegateCommand(() => { });

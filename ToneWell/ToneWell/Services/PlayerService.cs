@@ -21,7 +21,6 @@ namespace ToneWell.Services
 
         public Track CurrentTrack { get; set; }
 
-
         private PlayerService()
         {
             Tracks = new List<Track>();
@@ -64,10 +63,18 @@ namespace ToneWell.Services
 
         public void Play(Track track)
         {
+            if(CurrentTrack.Equals(track))
+            {
+                if (!mediaPlayer.IsPlaying)
+                    mediaPlayer.Resume();
 
-            CurrentTrack = track;
+            }
+            else
+            {
+                CurrentTrack = track;
 
-            mediaPlayer.StartPlayer(track.FilePath);
+                mediaPlayer.StartPlayer(track.FilePath);
+            }
         }
 
         public void Pause()

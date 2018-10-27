@@ -13,16 +13,17 @@ namespace ToneWell.Controls
 
         public ImageButton()
         {
+            Padding = 0;
+
+            GestureRecognizers.Clear();
+            GestureRecognizers.Add(new TapGestureRecognizer());
+
             _image = new CachedImage()
             {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
                 FadeAnimationEnabled = false,
             };
-
-            Padding = 0;
-            GestureRecognizers.Clear();
-            GestureRecognizers.Add(new TapGestureRecognizer());
 
             HeightRequest = 36d;
             WidthRequest = 36d;

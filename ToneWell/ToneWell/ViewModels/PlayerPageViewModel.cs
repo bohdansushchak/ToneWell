@@ -30,7 +30,11 @@ namespace ToneWell.ViewModels
         public Track Track
         {
             get { return track; }
-            set { track = value; }
+            set {
+
+                track = value;
+                RaisePropertyChanged("Track");
+            }
         }
 
         private void moreAction()

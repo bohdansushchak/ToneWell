@@ -53,7 +53,7 @@ namespace ToneWell.ViewModels
             set
             {
                 _tracks = value;
-                OnPropertyChanged("Tracks");
+                RaisePropertyChanged("Tracks");
             }
         }
     }

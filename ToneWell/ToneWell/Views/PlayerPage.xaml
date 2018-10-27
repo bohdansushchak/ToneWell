@@ -9,10 +9,9 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
 
-
     <StackLayout Margin="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-        <ffimageloading:CachedImage Source="{Binding Track.ImagePath}" HeightRequest="270" WidthRequest="270" Margin="20, 20, 20, 10"/>
+        <ffimageloading:CachedImage Source="{Binding Path=Track.ImagePath}" HeightRequest="270" WidthRequest="270" Margin="20, 20, 20, 10"/>
 
         <Grid Margin="10,30,10,10" HorizontalOptions="Center">
 
@@ -23,12 +22,12 @@
             </Grid.ColumnDefinitions>
 
             <control:ToggleButton VerticalOptions="Center" HorizontalOptions="Center" IconOn="btn_like_on.svg" IconOff="btn_like_off.svg"
-                                  State="{Binding IsLiked}" Grid.Column="0" Grid.Row="0" />
+                                  State="{Binding Path=Track.IsLiked}" Grid.Column="0" Grid.Row="0" />
 
             <StackLayout HorizontalOptions="CenterAndExpand" Spacing="0" Grid.Column="1" Grid.Row="0" Orientation="Vertical">
 
-                <Label Text="{Binding Track.Title}" FontSize="20" TextColor="{StaticResource TextColorPrimary}" HorizontalOptions="Center"/>
-                <Label Text="{Binding Track.Artist}" FontSize="14" TextColor="{StaticResource TextColorSubItem}" HorizontalOptions="Center"/>
+                <Label Text="{Binding Path=Track.Title}" FontSize="20" TextColor="{StaticResource TextColorPrimary}" HorizontalOptions="Center"/>
+                <Label Text="{Binding Path=Track.Artist}" FontSize="14" TextColor="{StaticResource TextColorSubItem}" HorizontalOptions="Center"/>
 
             </StackLayout>
             <control:ImageButton VerticalOptions="Center" HorizontalOptions="Center" Icon="more.svg" Command="{Binding MoreCommand}" Grid.Column="2" Grid.Row="0"/>
@@ -48,9 +47,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label FontSize="12" Text="{Binding Track.ProgressSec}" TextColor="{x:Static helper:Colors.l_TextSubItem}" Grid.Column="0"/>
+            <Label FontSize="12" Text="{Binding Path=Track.ProgressSec}" TextColor="{x:Static helper:Colors.l_TextSubItem}" Grid.Column="0"/>
 
-            <Label FontSize="12" Text="{Binding Track.LeftProgressSec}" TextColor="{x:Static helper:Colors.l_TextSubItem}" Grid.Column="2"/>
+            <Label FontSize="12" Text="{Binding Path=Track.LeftProgressSec}" TextColor="{x:Static helper:Colors.l_TextSubItem}" Grid.Column="2"/>
             
         </Grid>
 
@@ -75,6 +74,7 @@
             
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PreviousCommand}" Icon="btn_previous.svg" IconSize="53" Grid.Column="1" />
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PlayCommand}" Icon="btn_play.svg" IconSize="90" Grid.Column="2"/>
+            <!--<control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding PauseCommand}" Icon="btn_pause.svg" IconSize="90" Grid.Column="2"/>-->
             <control:ImageButton Margin="0,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding NextCommand}" Icon="btn_next.svg" IconSize="53" Grid.Column="3"/>
             
             <control:ToggleButton Margin="5,0,5,0" 

@@ -90,6 +90,7 @@ namespace ToneWell.Services
             var tracks = filePaths.ConvertAll(file => new Track
             {
                 Title = file.Split('/').Last().Split('.').First(),
+                Artist = file.Split('/').Last().Split('.').First().Split('_').FirstOrDefault(),
                 FilePath = file,
                 ImagePath = file,
             });

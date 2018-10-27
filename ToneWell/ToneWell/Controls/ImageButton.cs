@@ -90,7 +90,8 @@ namespace ToneWell.Controls
                 else
                     _image.Source = Icon;
             }
-            else if (propertyName == IconWidthProperty.PropertyName
+
+            if (propertyName == IconWidthProperty.PropertyName
                      || propertyName == IconHeightProperty.PropertyName)
             {
                 _image.WidthRequest = IconWidth;
@@ -98,7 +99,8 @@ namespace ToneWell.Controls
                 WidthRequest = Math.Max(IconWidth, 36d);
                 HeightRequest = Math.Max(IconHeight, 36d);
             }
-            else if (propertyName == IconSizeProperty.PropertyName)
+
+            if (propertyName == IconSizeProperty.PropertyName)
             {
                 if ((object)IconWidth != IconWidthProperty.DefaultValue)
                 {
@@ -112,11 +114,13 @@ namespace ToneWell.Controls
                     HeightRequest = Math.Max(IconSize, 36d);
                 }
             }
-            else if (propertyName == CommandProperty.PropertyName)
+
+            if (propertyName == CommandProperty.PropertyName)
             {
                 (GestureRecognizers.First() as TapGestureRecognizer).Command = Command;
             }
-            else if (propertyName == CommandParameterProperty.PropertyName)
+
+            if (propertyName == CommandParameterProperty.PropertyName)
             {
                 (GestureRecognizers.First() as TapGestureRecognizer).CommandParameter = CommandParameter;
             }

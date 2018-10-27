@@ -47,10 +47,3 @@ namespace ToneWell.Droid.Services
     }
 }
 
-/*
-        Using this: global::Android.OS.Environment.ExternalStorageDirectory.AbsolutePath.ToString();
-        Gives me this: /storage/emulated/0/
-        
-        Using this: Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
-        Gives me this: /data/data/my_app_full_name/files/
- */

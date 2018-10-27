@@ -4,6 +4,8 @@ namespace ToneWell.Services
 {
     public interface IMyMediaPlayer
     {
+        bool IsPlaying { get; }
+
         void StartPlayer(string filePath);
 
         void Pause();
@@ -13,5 +15,6 @@ namespace ToneWell.Services
         void Stop();
 
         void Release();
+
     }
 }

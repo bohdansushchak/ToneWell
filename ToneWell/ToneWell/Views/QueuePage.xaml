@@ -10,8 +10,10 @@
 
         <Label Text="Up Next" FontSize="Large" Margin="10,5,10,5"/>
 
-        <local:TrackListView Items="{Binding Tracks, Mode=TwoWay}" TapItemCommand="{Binding TapItemCommand}"/>
+        <Button Text="Go" Command="{Binding GoCommand}"/>
 
+        <local:TrackListView Items="{Binding Tracks, Mode=TwoWay}" TapItemCommand="{Binding TapItemCommand}"/>
+        
     </StackLayout>
 
 </ContentPage>

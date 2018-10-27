@@ -7,6 +7,8 @@ namespace ToneWell.Droid.Services
     {
         private MediaPlayer player;
 
+        public bool IsPlaying => player.IsPlaying;
+
         public MyMediaPlayer()
         {
             player = new MediaPlayer(); 

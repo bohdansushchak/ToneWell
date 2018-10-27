@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ToneWell.Models;
 
 namespace ToneWell.Services
@@ -20,13 +19,18 @@ namespace ToneWell.Services
 
         public List<Track> Tracks { get; set; }
 
+        public Track CurrentTrack { get; set; }
+
+
         private PlayerService()
-        {            
+        {
             Tracks = new List<Track>();
+            CurrentTrack = new Track();
 
             fileService = App.Container.Resolve<IFileService>();
             mediaPlayer = App.Container.Resolve<IMyMediaPlayer>();
 
+            Tracks = initializeTracks();
         }
 
         public static PlayerService Instance
@@ -58,7 +62,21 @@ namespace ToneWell.Services
             set { shuffleTrakcs = value; }
         }
 
-        public List<Track> InitializeTracks()
+        public void Play(Track track)
+        {
+
+            CurrentTrack = track;
+
+            mediaPlayer.StartPlayer(track.FilePath);
+        }
+
+        public void Pause()
+        {
+            if (mediaPlayer.IsPlaying)
+                mediaPlayer.Pause();
+        }
+
+        public List<Track> initializeTracks()
         {
             var filePaths = fileService.FindAllMp3Files();
 

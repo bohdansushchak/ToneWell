@@ -20,36 +20,40 @@ namespace ToneWell.ViewModels
             this.navigationService = navigationService;
             this.playerService = PlayerService.Instance;
 
-            var tracks = playerService.InitializeTracks();
+            TapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
 
-            Tracks = new ObservableCollection<Track>(tracks);
+            GoCommand = new DelegateCommand(() =>
+            {
+                var tracks = playerService.initializeTracks();
 
-            tapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
+                Tracks = new ObservableCollection<Track>(tracks);
+            });
 
         }
 
         private void tapItem(Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
             var item = (Track)e.ItemData;
-            System.Diagnostics.Debug.WriteLine(item.Title);
 
-            var p = new NavigationParameters();
+            var parametr = new NavigationParameters();
+            parametr.Add("item", item);
 
-            navigationService.NavigateAsync("PlayerPage", p);
+            navigationService.NavigateAsync("PlayerPage", parametr);
         }
 
-        private ICommand tapItemCommand;
-        public ICommand TapItemCommand
-        {
-            get { return tapItemCommand; }
-            set { tapItemCommand = value; }
-        }
+
+        public ICommand TapItemCommand { get; set; }
+        public ICommand GoCommand { get; set; }
 
         private ObservableCollection<Track> tracks;
         public ObservableCollection<Track> Tracks
         {
             get { return tracks; }
-            set { tracks = value; }
+            set
+            {
+                tracks = value;
+                OnPropertyChanged("tracks");
+            }
         }
     }
 }

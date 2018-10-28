@@ -17,13 +17,12 @@ namespace ToneWell.Services
         private IFileService fileService;
         private IMyMediaPlayer mediaPlayer;
 
-        public bool IsPlaying
-        {
-            get
-            {
-                return mediaPlayer.IsPlaying;
-            }
-        }
+        public bool IsPlaying => mediaPlayer.IsPlaying;
+
+        public int Duration => mediaPlayer.Duration;
+
+        public int CurrentPosition => mediaPlayer.CurrentPosition;
+
 
         public List<Track> Tracks { get; private set; }
 
@@ -54,6 +53,7 @@ namespace ToneWell.Services
                 }
 
                 return instance;
+
             }
         }
 
@@ -97,7 +97,7 @@ namespace ToneWell.Services
         {
             var index = Tracks.IndexOf(CurrentTrack);
 
-            if(++index >= Tracks.Count)
+            if (++index >= Tracks.Count)
             {
                 index = 0;
             }
@@ -111,11 +111,11 @@ namespace ToneWell.Services
 
             if (--index < 0)
             {
-                index = Tracks.Count -1;
+                index = Tracks.Count - 1;
             }
 
             Play(Tracks[index]);
-        } 
+        }
 
         public List<Track> initializeTracks()
         {

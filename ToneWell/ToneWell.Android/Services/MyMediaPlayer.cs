@@ -12,6 +12,10 @@ namespace ToneWell.Droid.Services
 
         public bool IsPlaying => player.IsPlaying;
 
+        public int Duration => player.Duration;
+
+        public int CurrentPosition => player.CurrentPosition;
+
         public MyMediaPlayer()
         {
             player = new MediaPlayer();

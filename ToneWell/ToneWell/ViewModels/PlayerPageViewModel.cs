@@ -15,14 +15,15 @@ namespace ToneWell.ViewModels
         {
             Title = "Player Page";
             playerService = PlayerService.Instance;
+            Track = playerService.CurrentTrack;
 
             MoreCommand = new DelegateCommand(moreAction);
             LikeCommand = new DelegateCommand(likeAction);
             PlayOrPauseCommand = new DelegateCommand(playOrPauseAction);
             RepeatCommand = new DelegateCommand(repeatAction);
             ShuffleCommand = new DelegateCommand(shuffleAction);
-            NextCommand = new DelegateCommand(() => { });
-            PreviousCommand = new DelegateCommand(() => { });
+            NextCommand = new DelegateCommand(nextTrackAction);
+            PreviousCommand = new DelegateCommand(previousTrackAction);
 
         }
 
@@ -69,6 +70,18 @@ namespace ToneWell.ViewModels
         private void shuffleAction()
         {
 
+        }
+
+        private void nextTrackAction()
+        {
+            playerService.PlayNextTrack();
+            Track = playerService.CurrentTrack;
+        }
+
+        private void previousTrackAction()
+        {
+            playerService.PlayPreviousTrack();
+            Track = playerService.CurrentTrack;
         }
 
         public ICommand MoreCommand { get; set; }

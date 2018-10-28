@@ -16,5 +16,7 @@ namespace ToneWell.Services
 
         void Release();
 
+        event EventHandler Completion;
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Android.Media;
+﻿using System;
+using Android.Media;
 using ToneWell.Services;
 
 namespace ToneWell.Droid.Services
@@ -7,11 +8,14 @@ namespace ToneWell.Droid.Services
     {
         private MediaPlayer player;
 
+        public event EventHandler Completion;
+
         public bool IsPlaying => player.IsPlaying;
 
         public MyMediaPlayer()
         {
             player = new MediaPlayer();
+            player.Completion += Completion;
         }
 
         public void Pause()
@@ -38,6 +42,8 @@ namespace ToneWell.Droid.Services
                 player.SetDataSource(filePath);
                 player.Prepare();
                 player.Start();
+                player.Completion += Completion;
+
             }
         }
 

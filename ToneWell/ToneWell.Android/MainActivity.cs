@@ -11,7 +11,9 @@ using ToneWell.Services;
 
 namespace ToneWell.Droid
 {
-    [Activity(Label = "ToneWell", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+
+    [Activity(Label = "ToneWell", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         readonly string[] PermissionsStorage = { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage };

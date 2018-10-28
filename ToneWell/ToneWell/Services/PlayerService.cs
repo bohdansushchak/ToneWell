@@ -25,9 +25,9 @@ namespace ToneWell.Services
             }
         }
 
-        public List<Track> Tracks { get; set; }
+        public List<Track> Tracks { get; private set; }
 
-        public Track CurrentTrack { get; set; }
+        public Track CurrentTrack { get; private set; }
 
         private PlayerService()
         {
@@ -75,13 +75,16 @@ namespace ToneWell.Services
             {
                 if (!mediaPlayer.IsPlaying)
                     mediaPlayer.Resume();
-
             }
             else
             {
                 CurrentTrack = track;
 
                 mediaPlayer.StartPlayer(track.FilePath);
+                mediaPlayer.Completion += delegate
+                {
+                    PlayNextTrack();
+                };
             }
         }
 
@@ -89,6 +92,30 @@ namespace ToneWell.Services
         {
             mediaPlayer.Pause();
         }
+
+        public void PlayNextTrack()
+        {
+            var index = Tracks.IndexOf(CurrentTrack);
+
+            if(++index >= Tracks.Count)
+            {
+                index = 0;
+            }
+
+            Play(Tracks[index]);
+        }
+
+        public void PlayPreviousTrack()
+        {
+            var index = Tracks.IndexOf(CurrentTrack);
+
+            if (--index < 0)
+            {
+                index = Tracks.Count -1;
+            }
+
+            Play(Tracks[index]);
+        } 
 
         public List<Track> initializeTracks()
         {
@@ -101,6 +128,8 @@ namespace ToneWell.Services
                 FilePath = file,
                 ImagePath = file,
             });
+
+            Tracks = tracks;
 
             return tracks;
         }

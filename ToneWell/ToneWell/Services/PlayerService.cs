@@ -81,6 +81,7 @@ namespace ToneWell.Services
                 CurrentTrack = track;
 
                 mediaPlayer.StartPlayer(track.FilePath);
+                mediaPlayer.Resume();
                 mediaPlayer.Completion += delegate
                 {
                     PlayNextTrack();
@@ -102,7 +103,17 @@ namespace ToneWell.Services
                 index = 0;
             }
 
-            Play(Tracks[index]);
+            if (mediaPlayer.IsPlaying)
+            {
+                Play(Tracks[index]);
+            }
+
+            else
+            {
+                CurrentTrack = Tracks[index];
+                mediaPlayer.StartPlayer(CurrentTrack.FilePath);
+            }
+                
         }
 
         public void PlayPreviousTrack()
@@ -114,7 +125,14 @@ namespace ToneWell.Services
                 index = Tracks.Count - 1;
             }
 
-            Play(Tracks[index]);
+            if (mediaPlayer.IsPlaying)
+                Play(Tracks[index]);
+            else
+            {
+                CurrentTrack = Tracks[index];
+                mediaPlayer.StartPlayer(CurrentTrack.FilePath);
+            }
+                
         }
 
         public List<Track> initializeTracks()

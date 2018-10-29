@@ -31,7 +31,11 @@ namespace ToneWell.Droid.Services
         public void Resume()
         {
             if (!player.IsPlaying)
+            {
                 player.Start();
+                player.Completion += Completion;
+            }
+                
         }
 
         public void StartPlayer(string filePath)
@@ -45,8 +49,8 @@ namespace ToneWell.Droid.Services
                 player.Reset();
                 player.SetDataSource(filePath);
                 player.Prepare();
-                player.Start();
-                player.Completion += Completion;
+                //player.Start();
+                //player.Completion += Completion;
 
             }
         }

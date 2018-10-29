@@ -40,8 +40,8 @@ namespace ToneWell.ViewModels
         {
             while (true)
             {
-                if (playerService.IsPlaying)
-                {
+                //if (playerService.IsPlaying)
+                //{
                     TimeSpan currTime = TimeSpan.FromMilliseconds(playerService.CurrentPosition);
                     TimeSpan leftTime = TimeSpan.FromMilliseconds(playerService.Duration - playerService.CurrentPosition);
 
@@ -54,7 +54,7 @@ namespace ToneWell.ViewModels
                     ProgressDegree = currentPosition / duration;
 
                     Thread.Sleep(1000);
-                }
+                //}
             }
         }
 

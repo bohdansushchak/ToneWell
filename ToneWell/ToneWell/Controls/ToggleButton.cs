@@ -105,7 +105,7 @@ namespace ToneWell.Controls
                     Image.Source = !string.IsNullOrEmpty(IconOff) ? SvgImageSource.FromFile(IconOff) : SvgImageSource.FromFile("more.svg");
                 }
             }
-
+            
             if(propertyName == IconOnProperty.PropertyName)
             {
                 if(State)
@@ -117,7 +117,7 @@ namespace ToneWell.Controls
                 if (!State)
                     Image.Source = !string.IsNullOrEmpty(IconOff) ? SvgImageSource.FromFile(IconOff) : SvgImageSource.FromFile("more.svg");
             }
-
+            
             if(propertyName == CommandProperty.PropertyName)
             {
                 (GestureRecognizers.First() as TapGestureRecognizer).Command = Command;

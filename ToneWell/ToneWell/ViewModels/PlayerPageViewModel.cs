@@ -23,6 +23,9 @@ namespace ToneWell.ViewModels
             LeftProgressSec = "-0:00";
             ProgressDegree = 0;
 
+            RepeatTracks = playerService.RepeatTracks;
+            ShuffleTracks = playerService.ShuffleTracks;
+
 
             MoreCommand = new DelegateCommand(moreAction);
             LikeCommand = new DelegateCommand(likeAction);
@@ -40,21 +43,19 @@ namespace ToneWell.ViewModels
         {
             while (true)
             {
-                //if (playerService.IsPlaying)
-                //{
-                    TimeSpan currTime = TimeSpan.FromMilliseconds(playerService.CurrentPosition);
-                    TimeSpan leftTime = TimeSpan.FromMilliseconds(playerService.Duration - playerService.CurrentPosition);
 
-                    CurrentPositionSec = currTime.ToString(@"m\:ss");
-                    LeftProgressSec = string.Format("-{0}", leftTime.ToString(@"m\:ss"));
+                TimeSpan currTime = TimeSpan.FromMilliseconds(playerService.CurrentPosition);
+                TimeSpan leftTime = TimeSpan.FromMilliseconds(playerService.Duration - playerService.CurrentPosition);
 
-                    double currentPosition = playerService.CurrentPosition;
-                    double duration = playerService.Duration;
+                CurrentPositionSec = currTime.ToString(@"m\:ss");
+                LeftProgressSec = string.Format("-{0}", leftTime.ToString(@"m\:ss"));
 
-                    ProgressDegree = currentPosition / duration;
+                double currentPosition = playerService.CurrentPosition;
+                double duration = playerService.Duration;
 
-                    Thread.Sleep(1000);
-                //}
+                ProgressDegree = currentPosition / duration;
+
+                Thread.Sleep(1000);
             }
         }
 
@@ -95,12 +96,14 @@ namespace ToneWell.ViewModels
 
         private void repeatAction()
         {
-
+            playerService.RepeatTracks = !playerService.RepeatTracks;
+            RepeatTracks = playerService.RepeatTracks;
         }
 
         private void shuffleAction()
         {
-
+            playerService.ShuffleTracks = !playerService.ShuffleTracks;
+            ShuffleTracks = playerService.ShuffleTracks;
         }
 
         private void nextTrackAction()
@@ -123,6 +126,10 @@ namespace ToneWell.ViewModels
         public ICommand NextCommand { get; set; }
         public ICommand PreviousCommand { get; set; }
 
+
+
+        private bool repeatTracks;
+        private bool shuffleTracks;
         private string currentPositionSec;
         private string leftProgressSec;
         private double progressDegree;
@@ -138,6 +145,26 @@ namespace ToneWell.ViewModels
                 currentPositionSec = value;
                 RaisePropertyChanged("CurrentPositionSec");
 
+            }
+        }
+
+        public bool RepeatTracks
+        {
+            get { return repeatTracks; }
+            set
+            {
+                repeatTracks = value;
+                RaisePropertyChanged("RepeatTracks");
+            }
+        }
+
+        public bool ShuffleTracks
+        {
+            get { return shuffleTracks; }
+            set
+            {
+                shuffleTracks = value;
+                RaisePropertyChanged("ShuffleTracks");
             }
         }
 

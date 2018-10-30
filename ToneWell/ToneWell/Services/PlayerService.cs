@@ -1,12 +1,13 @@
 ﻿using DryIoc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using ToneWell.Models;
 
 namespace ToneWell.Services
 {
-    public class PlayerService
+    public class PlayerService : INotifyPropertyChanged
     {
         private static volatile PlayerService instance;
         private static object syncRoot = new Object();
@@ -16,6 +17,8 @@ namespace ToneWell.Services
 
         private IFileService fileService;
         private IMyMediaPlayer mediaPlayer;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsPlaying => mediaPlayer.IsPlaying;
 
@@ -35,6 +38,9 @@ namespace ToneWell.Services
 
             fileService = App.Container.Resolve<IFileService>();
             mediaPlayer = App.Container.Resolve<IMyMediaPlayer>();
+
+            RepeatTracks = false;
+            ShuffleTracks = false;
 
             Tracks = initializeTracks();
         }
@@ -57,16 +63,21 @@ namespace ToneWell.Services
             }
         }
 
-        public bool RepeatTraks
+        public bool RepeatTracks
         {
             get { return repeatTracks; }
-            set { repeatTracks = value; }
+            set { repeatTracks = value;
+                OnPropertyChanged("repeatTraks");
+            }
         }
 
-        public bool ShuffleTraks
+        public bool ShuffleTracks
         {
             get { return shuffleTrakcs; }
-            set { shuffleTrakcs = value; }
+            set {
+                shuffleTrakcs = value;
+                OnPropertyChanged("shuffleTraks");
+            }
         }
 
         public void Play(Track track)
@@ -84,7 +95,22 @@ namespace ToneWell.Services
                 mediaPlayer.Resume();
                 mediaPlayer.Completion += delegate
                 {
-                    PlayNextTrack();
+
+                    var index = Tracks.IndexOf(CurrentTrack);
+
+                    if (++index >= Tracks.Count)
+                    {
+                        index = 0;
+                    }
+
+                    if (index == 0 && repeatTracks)
+                    {
+                        Play(Tracks[index]);
+                    }
+                    else if (index > 0)
+                    {
+                        Play(Tracks[index]);
+                    }
                 };
             }
         }
@@ -113,7 +139,7 @@ namespace ToneWell.Services
                 CurrentTrack = Tracks[index];
                 mediaPlayer.StartPlayer(CurrentTrack.FilePath);
             }
-                
+
         }
 
         public void PlayPreviousTrack()
@@ -132,7 +158,7 @@ namespace ToneWell.Services
                 CurrentTrack = Tracks[index];
                 mediaPlayer.StartPlayer(CurrentTrack.FilePath);
             }
-                
+
         }
 
         public List<Track> initializeTracks()
@@ -150,6 +176,12 @@ namespace ToneWell.Services
             Tracks = tracks;
 
             return tracks;
+        }
+
+        public void OnPropertyChanged(string property)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

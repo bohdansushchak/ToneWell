@@ -1,24 +1,22 @@
 ﻿using DryIoc;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Threading;
+using ToneWell.Helpers;
 using ToneWell.Models;
 
 namespace ToneWell.Services
 {
-    public class PlayerService : INotifyPropertyChanged
+    public class PlayerService
     {
         private static volatile PlayerService instance;
         private static object syncRoot = new Object();
 
-        private bool repeatTracks;
-        private bool shuffleTrakcs;
-
         private IFileService fileService;
         private IMyMediaPlayer mediaPlayer;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private Thread updateProgressThread;
 
         public bool IsPlaying => mediaPlayer.IsPlaying;
 
@@ -26,6 +24,7 @@ namespace ToneWell.Services
 
         public int CurrentPosition => mediaPlayer.CurrentPosition;
 
+        public event EventHandler<PlayerArgs> UpdateProgress;
 
         public List<Track> Tracks { get; private set; }
 
@@ -41,6 +40,10 @@ namespace ToneWell.Services
 
             RepeatTracks = false;
             ShuffleTracks = false;
+
+            updateProgressThread = new Thread(updateProgres);
+            updateProgressThread.IsBackground = true;
+            updateProgressThread.Start();
 
             Tracks = initializeTracks();
         }
@@ -63,22 +66,36 @@ namespace ToneWell.Services
             }
         }
 
-        public bool RepeatTracks
+        private void updateProgres()
         {
-            get { return repeatTracks; }
-            set { repeatTracks = value;
-                OnPropertyChanged("repeatTraks");
+            while (true)
+            {
+                
+                TimeSpan currTime = TimeSpan.FromMilliseconds(CurrentPosition);
+                TimeSpan leftTime = TimeSpan.FromMilliseconds(Duration - CurrentPosition);
+
+                var CurrentPositionSec = currTime.ToString(@"m\:ss");
+                var LeftProgressSec = string.Format("-{0}", leftTime.ToString(@"m\:ss"));
+
+                double currentPosition = CurrentPosition;
+                double duration = Duration;
+
+                var args = new PlayerArgs
+                {
+                    CurrentPositionSec = currTime.ToString(@"m\:ss"),
+                    LeftProgressSec = string.Format("-{0}", leftTime.ToString(@"m\:ss")),
+                    ProgressDegree = currentPosition / duration
+                };
+
+                UpdateProgress?.Invoke(this, args);
+
+                Thread.Sleep(1000);
             }
         }
 
-        public bool ShuffleTracks
-        {
-            get { return shuffleTrakcs; }
-            set {
-                shuffleTrakcs = value;
-                OnPropertyChanged("shuffleTraks");
-            }
-        }
+        public bool RepeatTracks { get; set; }
+
+        public bool ShuffleTracks { get; set; }
 
         public void Play(Track track)
         {
@@ -103,7 +120,7 @@ namespace ToneWell.Services
                         index = 0;
                     }
 
-                    if (index == 0 && repeatTracks)
+                    if (index == 0 && RepeatTracks)
                     {
                         Play(Tracks[index]);
                     }
@@ -176,12 +193,6 @@ namespace ToneWell.Services
             Tracks = tracks;
 
             return tracks;
-        }
-
-        public void OnPropertyChanged(string property)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
     }
 }

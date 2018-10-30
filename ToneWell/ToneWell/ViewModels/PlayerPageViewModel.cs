@@ -1,8 +1,8 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using System;
 using System.Threading;
 using System.Windows.Input;
+using ToneWell.Helpers;
 using ToneWell.Models;
 using ToneWell.Services;
 
@@ -11,6 +11,7 @@ namespace ToneWell.ViewModels
     public class PlayerPageViewModel : ViewModelBase, INavigatedAware
     {
         protected PlayerService playerService;
+        private Thread updateProgressThread;
 
         public PlayerPageViewModel(INavigationService navigationService)
            : base(navigationService)
@@ -26,7 +27,6 @@ namespace ToneWell.ViewModels
             RepeatTracks = playerService.RepeatTracks;
             ShuffleTracks = playerService.ShuffleTracks;
 
-
             MoreCommand = new DelegateCommand(moreAction);
             LikeCommand = new DelegateCommand(likeAction);
             PlayOrPauseCommand = new DelegateCommand(playOrPauseAction);
@@ -35,28 +35,12 @@ namespace ToneWell.ViewModels
             NextCommand = new DelegateCommand(nextTrackAction);
             PreviousCommand = new DelegateCommand(previousTrackAction);
 
-            Thread thread = new Thread(updateProgres);
-            thread.Start();
-        }
-
-        private void updateProgres()
-        {
-            while (true)
+            playerService.UpdateProgress += delegate (object sender, PlayerArgs args)
             {
-
-                TimeSpan currTime = TimeSpan.FromMilliseconds(playerService.CurrentPosition);
-                TimeSpan leftTime = TimeSpan.FromMilliseconds(playerService.Duration - playerService.CurrentPosition);
-
-                CurrentPositionSec = currTime.ToString(@"m\:ss");
-                LeftProgressSec = string.Format("-{0}", leftTime.ToString(@"m\:ss"));
-
-                double currentPosition = playerService.CurrentPosition;
-                double duration = playerService.Duration;
-
-                ProgressDegree = currentPosition / duration;
-
-                Thread.Sleep(1000);
-            }
+                CurrentPositionSec = args.CurrentPositionSec;
+                LeftProgressSec = args.LeftProgressSec;
+                ProgressDegree = args.ProgressDegree;
+            };
         }
 
         private Track track;
@@ -125,8 +109,6 @@ namespace ToneWell.ViewModels
         public ICommand ShuffleCommand { get; set; }
         public ICommand NextCommand { get; set; }
         public ICommand PreviousCommand { get; set; }
-
-
 
         private bool repeatTracks;
         private bool shuffleTracks;

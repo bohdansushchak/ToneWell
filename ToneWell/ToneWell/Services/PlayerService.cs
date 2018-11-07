@@ -70,7 +70,7 @@ namespace ToneWell.Services
         {
             while (true)
             {
-                
+
                 TimeSpan currTime = TimeSpan.FromMilliseconds(CurrentPosition);
                 TimeSpan leftTime = TimeSpan.FromMilliseconds(Duration - CurrentPosition);
 
@@ -182,13 +182,50 @@ namespace ToneWell.Services
         {
             var filePaths = fileService.FindAllMp3Files();
 
-            var tracks = filePaths.ConvertAll(file => new Track
+            var tracks = new List<Track>();
+
+            foreach (var file in filePaths)
             {
-                Title = file.Split('/').Last().Split('.').First(),
-                Artist = file.Split('/').Last().Split('.').First().Split('_').FirstOrDefault(),
-                FilePath = file,
-                ImagePath = file,
-            });
+                var track = new Track();
+
+                try
+                {
+                    TagLib.File tagFile = TagLib.File.Create(file);
+
+                    string artist = tagFile.Tag.FirstAlbumArtist;
+                    string title = tagFile.Tag.Title;
+
+                    /*
+                    var mStream = new MemoryStream();
+                    var firstPicture = tagFile.Tag.Pictures.FirstOrDefault();
+                    if (firstPicture != null)
+                    {
+                        byte[] pData = firstPicture.Data.Data;
+                        mStream.Write(pData, 0, Convert.ToInt32(pData.Length));
+                        mStream.Dispose();
+                    }
+                    */
+
+                    if (string.IsNullOrEmpty(title))
+                    {
+                        title = file.Split('/').Last().Split('.').First();
+                    }
+
+                    track.Title = title;
+                    track.Artist = artist;
+                    
+                }
+                catch(Exception e)
+                {
+                    track.Title = file.Split('/').Last().Split('.').First();                    
+                }
+                finally
+                {
+                    track.FilePath = file;
+                }
+
+                tracks.Add(track);
+            }
 
             Tracks = tracks;
 

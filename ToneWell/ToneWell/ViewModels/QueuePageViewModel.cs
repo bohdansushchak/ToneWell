@@ -41,7 +41,6 @@ namespace ToneWell.ViewModels
             navigationService.NavigateAsync("PlayerPage", parametr);
         }
 
-
         public ICommand TapItemCommand { get; set; }
         public ICommand GoCommand { get; set; }
 

@@ -22,6 +22,8 @@ namespace ToneWell.Droid
 
         protected async override void OnCreate(Bundle bundle)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDA4ODNAMzEzNjJlMzMyZTMwbVQvTFZsSmU5ZXh0Y0Z5RmozTkljVXlIRlRZT0tWTmVySitRUWh5dnlOYz0=");
+
             await TryToGetPermissions();
 
             TabLayoutResource = Resource.Layout.Tabbar;

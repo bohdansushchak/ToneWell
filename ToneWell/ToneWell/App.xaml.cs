@@ -10,12 +10,6 @@ namespace ToneWell
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
-
         public static Container Container { get; private set; } = new Container();
 
         public App() : this(null)
@@ -29,7 +23,7 @@ namespace ToneWell
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("CustomNavigationPage/QueuePage"); //NavigationPage/
+            await NavigationService.NavigateAsync("CustomNavigationPage/QueuePage");
 
             //TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
         }

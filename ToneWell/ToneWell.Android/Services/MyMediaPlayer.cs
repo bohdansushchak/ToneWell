@@ -1,5 +1,5 @@
-﻿using System;
-using Android.Media;
+﻿using Android.Media;
+using System;
 using ToneWell.Services;
 
 namespace ToneWell.Droid.Services
@@ -35,7 +35,7 @@ namespace ToneWell.Droid.Services
                 player.Start();
                 player.Completion += Completion;
             }
-                
+
         }
 
         public void StartPlayer(string filePath)
@@ -46,12 +46,12 @@ namespace ToneWell.Droid.Services
             }
             else
             {
-                player.Reset();
-                player.SetDataSource(filePath);
-                player.Prepare();
-                //player.Start();
-                //player.Completion += Completion;
-
+                if (!string.IsNullOrEmpty(filePath))
+                {
+                    player.Reset();
+                    player.SetDataSource(filePath);
+                    player.Prepare();
+                }
             }
         }
 

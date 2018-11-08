@@ -46,12 +46,11 @@ namespace ToneWell.Controls
                     HeightRequest = 60d,
                     WidthRequest = 60d,
                     Aspect = Aspect.AspectFill,
-                    LoadingPlaceholder = "thumbnail.png",
                     ErrorPlaceholder = "thumbnail.png",
-                    Source = "http://loremflickr.com/600/600/nature?filename=simple.jpg"
+                    CacheType = FFImageLoading.Cache.CacheType.None,
                 };
 
-                //_trackImage.SetBinding(CachedImage.SourceProperty, new Binding("ImagePath"));
+                _trackImage.SetBinding(CachedImage.SourceProperty, new Binding("FilePath", converter:Converters.Converters.GetImageFromTrackConverter));
 
                 var _labelRoot = new StackLayout
                 {

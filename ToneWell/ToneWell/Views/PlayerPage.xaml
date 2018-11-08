@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:control="clr-namespace:ToneWell.Controls;assembly=ToneWell"
+             xmlns:converter="clr-namespace:ToneWell.Converters;assembly=ToneWell"
              xmlns:helper="clr-namespace:ToneWell.Helpers;assembly=ToneWell"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ToneWell.Views.PlayerPage"
@@ -11,7 +12,10 @@
 
     <StackLayout Margin="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-        <ffimageloading:CachedImage Source="{Binding Path=Track.ImagePath}" HeightRequest="270" WidthRequest="270" Margin="20, 20, 20, 10"/>
+        <ffimageloading:CachedImage 
+            Source="{Binding Path=Track.FilePath, Converter={x:Static converter:Converters.GetImageFromTrackConverter}}" 
+            HeightRequest="270" WidthRequest="270" Margin="20, 20, 20, 10"
+            CacheType="None"/>
 
         <Grid Margin="10,30,10,10" HorizontalOptions="Center">
 

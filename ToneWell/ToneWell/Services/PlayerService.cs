@@ -195,17 +195,6 @@ namespace ToneWell.Services
                     string artist = tagFile.Tag.FirstAlbumArtist;
                     string title = tagFile.Tag.Title;
 
-                    /*
-                    var mStream = new MemoryStream();
-                    var firstPicture = tagFile.Tag.Pictures.FirstOrDefault();
-                    if (firstPicture != null)
-                    {
-                        byte[] pData = firstPicture.Data.Data;
-                        mStream.Write(pData, 0, Convert.ToInt32(pData.Length));
-                        mStream.Dispose();
-                    }
-                    */
-
                     if (string.IsNullOrEmpty(title))
                     {
                         title = file.Split('/').Last().Split('.').First();

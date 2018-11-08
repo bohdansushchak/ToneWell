@@ -123,9 +123,6 @@
     <AndroidResource Include="Resources\drawable\more.svg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\drawable\thumbnail" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Renderers\" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\btn_pause.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\thumbnail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

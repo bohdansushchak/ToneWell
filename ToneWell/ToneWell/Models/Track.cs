@@ -5,7 +5,7 @@ namespace ToneWell.Models
 {
     public class Track : INotifyPropertyChanged
     {
-        private string imagePath;
+        //private string imagePath;
         private string title;
         private string artist;
         private string filePath;
@@ -53,7 +53,7 @@ namespace ToneWell.Models
                 OnPropertyChanged("leftProgressSec");
             }
         }
-
+        /*
         public string ImagePath
         {
             get { return imagePath; }
@@ -63,6 +63,7 @@ namespace ToneWell.Models
                 OnPropertyChanged("imagePath");
             }
         }
+        */
         public string Title
         {
             get { return title; }

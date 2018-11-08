@@ -13,7 +13,7 @@
     <StackLayout Margin="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
         <ffimageloading:CachedImage 
-            Source="{Binding Path=Track.FilePath, Converter={x:Static converter:Converters.GetImageFromTrackConverter}}" 
+            Source="{Binding Path=Track.FilePath, Converter={x:Static converter:Converters.GetImageFromTrackConverter}, ConverterParameter='thumbnail.png'}" 
             HeightRequest="270" WidthRequest="270" Margin="20, 20, 20, 10"
             CacheType="None"/>
 

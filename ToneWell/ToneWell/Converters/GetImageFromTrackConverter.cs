@@ -41,7 +41,7 @@ namespace ToneWell.Converters
                 }
             }
 
-            return "thumbnail.png";
+            return parameter;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

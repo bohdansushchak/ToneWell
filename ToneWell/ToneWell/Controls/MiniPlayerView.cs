@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using FFImageLoading.Forms;
 using ToneWell.Helpers;
 using Xamarin.Forms;
@@ -132,15 +133,103 @@ namespace ToneWell.Controls
             Content = root;
         }
 
+        public static readonly BindableProperty PlayOrPauseCommandProperty = BindableProperty.Create(nameof(PlayOrPauseCommand), typeof(ICommand), typeof(MiniPlayerView), default(ICommand));
+
+        public ICommand PlayOrPauseCommand
+        {
+            get { return (ICommand)GetValue(PlayOrPauseCommandProperty); }
+            set { SetValue(PlayOrPauseCommandProperty, value); }
+        }
+
+        public static readonly BindableProperty PreviousCommandProperty = BindableProperty.Create(nameof(PreviousCommand), typeof(ICommand), typeof(MiniPlayerView), default(ICommand));
+
+        public ICommand PreviousCommand
+        {
+            get { return (ICommand)GetValue(PreviousCommandProperty); }
+            set { SetValue(PreviousCommandProperty, value); }
+        }
+
+        public static readonly BindableProperty NextCommandProperty = BindableProperty.Create(nameof(NextCommand), typeof(ICommand), typeof(MiniPlayerView), default(ICommand));
+
+        public ICommand NextCommand
+        {
+            get { return (ICommand)GetValue(NextCommandProperty); }
+            set { SetValue(NextCommandProperty, value); }
+        }
 
 
+        public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress), typeof(double), typeof(MiniPlayerView), default(double));
 
+        public double Progress
+        {
+            get { return (double)GetValue(ProgressProperty); }
+            set { SetValue(ProgressProperty, value); }
+        }
 
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(double), typeof(MiniPlayerView), default(string));
+
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
+        public static readonly BindableProperty ArtistProperty = BindableProperty.Create(nameof(Artist), typeof(double), typeof(MiniPlayerView), default(string));
+
+        public string Artist
+        {
+            get { return (string)GetValue(ArtistProperty); }
+            set { SetValue(ArtistProperty, value); }
+        }
+
+        public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(double), typeof(MiniPlayerView), default(string));
+
+        public string ImageSource
+        {
+            get { return (string)GetValue(ImageSourceProperty); }
+            set { SetValue(ImageSourceProperty, value); }
+        }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 
+            if (propertyName.Equals(ProgressProperty.PropertyName))
+            {
+                if(Progress >= 0)
+                    progressBar.Progress = Progress;
+            }
+
+            if (propertyName.Equals(PlayOrPauseCommandProperty.PropertyName))
+            {
+                btnPlay.Command = PlayOrPauseCommand;
+            }
+
+            if (propertyName.Equals(PreviousCommandProperty.PropertyName))
+            {
+                btnPrevious.Command = PreviousCommand;
+            }
+
+            if (propertyName.Equals(NextCommandProperty.PropertyName))
+            {
+                btnNext.Command = NextCommand;
+            }
+
+            if (propertyName.Equals(TitleProperty.PropertyName))
+            {
+                lTitle.Text = Title;
+            }
+
+            if (propertyName.Equals(ArtistProperty.PropertyName))
+            {
+                lArtist.Text = Artist;
+            }
+
+            if (propertyName.Equals(ImageSourceProperty.PropertyName))
+            {
+                if(!string.IsNullOrEmpty(ImageSource))
+                    image.Source = ImageSource;
+            }
 
         }
     }

@@ -218,6 +218,8 @@ namespace ToneWell.Services
 
             Tracks = tracks;
 
+            CurrentTrack = Tracks.FirstOrDefault();
+
             return tracks;
         }
     }

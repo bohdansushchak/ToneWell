@@ -4,24 +4,27 @@ using Syncfusion.ListView.XForms;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using ToneWell.Helpers;
 using ToneWell.Models;
 using Xamarin.Forms;
 
 namespace ToneWell.Controls
 {
-    public class TrackListView : ContentView
+    public class TrackDragListView : ContentView
     {
         protected SfListView rootListView;
         protected DataTemplate dataTemplate;
 
-        public TrackListView()
+        public TrackDragListView()
         {
             rootListView = new SfListView();
             rootListView.SelectionMode = SelectionMode.None;
             rootListView.Padding = 0;
             rootListView.Margin = 0;
+
             rootListView.DragStartMode = DragStartMode.OnDragIndicator;
             rootListView.AutoFitMode = AutoFitMode.Height;
+
             rootListView.DragDropController.UpdateSource = true;
             rootListView.ItemTapped += ItemTapped;
 
@@ -64,7 +67,7 @@ namespace ToneWell.Controls
                 var _labelTitle = new Label
                 {
                     FontSize = 14,
-                    TextColor = Color.FromHex("#414344"),
+                    TextColor = Colors.l_TextPrimary,
                     Margin = new Thickness(5, 0, 5, 0),
                 };
 
@@ -73,7 +76,7 @@ namespace ToneWell.Controls
                 var _labelSubTitle = new Label()
                 {
                     FontSize = 12,
-                    TextColor = Color.FromHex("#AAAFB3"),
+                    TextColor = Colors.l_TextSubItem,
                     Margin = new Thickness(5, 0, 5, 0),
                 };
 
@@ -118,7 +121,7 @@ namespace ToneWell.Controls
                 TapItemCommand.Execute(e);
         }
 
-        public static readonly BindableProperty TapItemCommandProperty = BindableProperty.Create(nameof(TapItemCommand), typeof(ICommand), typeof(TrackListView), default(ICommand));
+        public static readonly BindableProperty TapItemCommandProperty = BindableProperty.Create(nameof(TapItemCommand), typeof(ICommand), typeof(TrackDragListView), default(ICommand));
 
         public ICommand TapItemCommand
         {
@@ -126,7 +129,7 @@ namespace ToneWell.Controls
             set { SetValue(TapItemCommandProperty, value); }
         }
 
-        public static readonly BindableProperty ItemsProperty = BindableProperty.Create(nameof(Items), typeof(ICollection<Track>), typeof(TrackListView), default(ICollection<Track>));
+        public static readonly BindableProperty ItemsProperty = BindableProperty.Create(nameof(Items), typeof(ICollection<Track>), typeof(TrackDragListView), default(ICollection<Track>));
 
         public ICollection<Track> Items
         {

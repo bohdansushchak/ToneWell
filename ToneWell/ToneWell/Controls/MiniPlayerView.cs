@@ -166,7 +166,7 @@ namespace ToneWell.Controls
             set { SetValue(ProgressProperty, value); }
         }
 
-        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(double), typeof(MiniPlayerView), default(string));
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MiniPlayerView), default(string));
 
         public string Title
         {
@@ -174,7 +174,7 @@ namespace ToneWell.Controls
             set { SetValue(TitleProperty, value); }
         }
 
-        public static readonly BindableProperty ArtistProperty = BindableProperty.Create(nameof(Artist), typeof(double), typeof(MiniPlayerView), default(string));
+        public static readonly BindableProperty ArtistProperty = BindableProperty.Create(nameof(Artist), typeof(string), typeof(MiniPlayerView), default(string));
 
         public string Artist
         {
@@ -182,12 +182,20 @@ namespace ToneWell.Controls
             set { SetValue(ArtistProperty, value); }
         }
 
-        public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(double), typeof(MiniPlayerView), default(string));
+        public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource), typeof(string), typeof(MiniPlayerView), default(string));
 
         public string ImageSource
         {
             get { return (string)GetValue(ImageSourceProperty); }
             set { SetValue(ImageSourceProperty, value); }
+        }
+
+        public static readonly BindableProperty IsPlayingProperty = BindableProperty.Create(nameof(IsPlaying), typeof(bool), typeof(MiniPlayerView), default(bool));
+
+        public bool IsPlaying
+        {
+            get { return (bool)GetValue(IsPlayingProperty); }
+            set { SetValue(IsPlayingProperty, value); }
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -213,6 +221,11 @@ namespace ToneWell.Controls
             if (propertyName.Equals(NextCommandProperty.PropertyName))
             {
                 btnNext.Command = NextCommand;
+            }
+
+            if (propertyName.Equals(IsPlayingProperty.PropertyName))
+            {
+                btnPlay.State = IsPlaying;
             }
 
             if (propertyName.Equals(TitleProperty.PropertyName))

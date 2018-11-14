@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using ToneWell.Helpers;
 using ToneWell.Models;
 using ToneWell.Services;
 
@@ -11,6 +12,7 @@ namespace ToneWell.ViewModels
     {
         protected INavigationService navigationService;
         protected PlayerService playerService;
+        
 
         public QueuePageViewModel(INavigationService navigationService)
            : base(navigationService)
@@ -29,6 +31,16 @@ namespace ToneWell.ViewModels
                 Tracks = new ObservableCollection<Track>(tracks);
             });
 
+            PlayOrPauseCommand = new DelegateCommand(playOrPauseAction);
+            NextCommand = new DelegateCommand(nextTrackAction);
+            PreviousCommand = new DelegateCommand(previousTrackAction);
+
+            playerService.UpdateProgress += delegate (object sender, PlayerArgs args)
+            {
+                ProgressDegree = args.ProgressDegree;
+            };
+
+            Track = playerService.CurrentTrack;
         }
 
         private void tapItem(Syncfusion.ListView.XForms.ItemTappedEventArgs e)
@@ -54,13 +66,13 @@ namespace ToneWell.ViewModels
         private void nextTrackAction()
         {
             playerService.PlayNextTrack();
-            //Track = playerService.CurrentTrack;
+            Track = playerService.CurrentTrack;
         }
 
         private void previousTrackAction()
         {
             playerService.PlayPreviousTrack();
-            //Track = playerService.CurrentTrack;
+            Track = playerService.CurrentTrack;
         }
         private void playOrPauseAction()
         {
@@ -70,7 +82,7 @@ namespace ToneWell.ViewModels
             }
             else
             {
-               // playerService.Play(Track);
+                playerService.Play(Track);
             }
 
         }
@@ -85,5 +97,30 @@ namespace ToneWell.ViewModels
                 RaisePropertyChanged("Tracks");
             }
         }
+
+        private Track track;
+        public Track Track
+        {
+            get { return track; }
+            set
+            {
+
+                track = value;
+                RaisePropertyChanged("Track");
+            }
+        }
+
+        private double progressDegree;
+
+        public double ProgressDegree
+        {
+            get { return progressDegree; }
+            set
+            {
+                progressDegree = value;
+                RaisePropertyChanged("ProgressDegree");
+            }
+        }
+
     }
 }

@@ -3059,7 +3059,7 @@ namespace ToneWell.Droid
 			public const int playlist = 2130837820;
 			
 			// aapt resource value: 0x7f02013d
-			public const int set = 2130837821;
+			public const int settings = 2130837821;
 			
 			// aapt resource value: 0x7f02013e
 			public const int settings_2 = 2130837822;

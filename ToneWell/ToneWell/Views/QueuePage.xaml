@@ -6,22 +6,30 @@
              Title="{Binding Title}">
 
     <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            
+
         </Grid.RowDefinitions>
 
         <Label Text="Up Next" FontSize="Large" Margin="10,5,10,5" Grid.Row="0"/>
 
         <Button Text="Go" Command="{Binding GoCommand}" Grid.Row="1"/>
 
-        <local:TrackListView Items="{Binding Tracks, Mode=TwoWay}" TapItemCommand="{Binding TapItemCommand}" Grid.Row="2"/>
+        <local:TrackDragListView Items="{Binding Tracks, Mode=TwoWay}" TapItemCommand="{Binding TapItemCommand}" Grid.Row="2"/>
 
-        <local:MiniPlayerView PlayOrPauseCommand="{}"  Grid.Row="3"/>
+        <local:MiniPlayerView 
+                Progress="{Binding ProgressDegree}"
+                Title="{Binding Path=Track.Title}"
+                Artist="{Binding Path=Track.Artist}"
+                IsPlaying="{Binding Path=playerService.IsPlaying}"
+                PlayOrPauseCommand="{Binding PlayOrPauseCommand}" 
+                NextCommand="{Binding NextCommand}" 
+                PreviousCommand="{Binding PreviousCommand}" 
+                Grid.Row="3"/>
 
     </Grid>
 

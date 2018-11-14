@@ -10,6 +10,8 @@ namespace ToneWell.ViewModels
             BarBackgroundColor = Color.FromHex("#ffffff");
             BarTextColor = Colors.l_TextPrimary;
             
+            
+            
         }
     }
 }

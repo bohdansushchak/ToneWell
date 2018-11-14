@@ -6,13 +6,19 @@ namespace ToneWell.ViewModels
 {
     public class YourLibraryPageViewModel : ViewModelBase
     {
+        protected INavigationService navigationService;
 
         public YourLibraryPageViewModel(INavigationService navigationService)
           : base(navigationService)
         {
             Title = "YourLibrary";
-
+            this.navigationService = navigationService;
             TapItemCommand = new DelegateCommand<string>(tapItem);
+            SettingsCommand = new DelegateCommand(() =>
+            {
+
+            });
+
         }
 
         void tapItem(string param)
@@ -26,6 +32,7 @@ namespace ToneWell.ViewModels
 
                 case "Songs":
                     {
+                        navigationService.NavigateAsync("SongListPage");
                         break;
                     }
 
@@ -39,5 +46,7 @@ namespace ToneWell.ViewModels
 
 
         public ICommand TapItemCommand { get; set; }
+
+        public ICommand SettingsCommand { get; set; }
     }
 }

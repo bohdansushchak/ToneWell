@@ -26,13 +26,16 @@ namespace ToneWell.Controls
             {
                 WidthRequest = 36,
                 HeightRequest = 36,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
             };
 
             title = new Label
             {
                 FontAttributes = FontAttributes.Bold,
                 FontSize = 16,
-                TextColor = Colors.l_TextPrimary
+                TextColor = Colors.l_TextPrimary,
+                VerticalOptions = LayoutOptions.Center
             };
 
 

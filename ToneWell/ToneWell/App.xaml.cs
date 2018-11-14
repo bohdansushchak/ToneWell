@@ -50,6 +50,7 @@ namespace ToneWell
             containerRegistry.RegisterForNavigation<QueuePage, QueuePageViewModel>();
             containerRegistry.RegisterForNavigation<PlayerPage, PlayerPageViewModel>();
             containerRegistry.RegisterForNavigation<YourLibraryPage, YourLibraryPageViewModel>();
+            containerRegistry.RegisterForNavigation<SongListPage, SongListPageViewModel>();
         }
     }
 }

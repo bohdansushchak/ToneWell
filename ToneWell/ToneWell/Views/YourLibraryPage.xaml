@@ -9,6 +9,15 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ToneWell.Views.YourLibraryPage"
              Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Settings" Order="Primary"
+                     Icon="set.png"
+                     Text="Settings"
+                     Priority="0" Command="{Binding SettingsCommand}"/>
+
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
             
@@ -25,4 +34,6 @@
         </StackLayout>
 
     </ContentPage.Content>
+    
+
 </ContentPage>

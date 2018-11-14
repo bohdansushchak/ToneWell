@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ToneWell.Controls;assembly=ToneWell"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:control="clr-namespace:ToneWell.Controls;assembly=ToneWell"
+             xmlns:converter="clr-namespace:ToneWell.Converters;assembly=ToneWell"
+             xmlns:helper="clr-namespace:ToneWell.Helpers;assembly=ToneWell"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ToneWell.Views.SongListPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Song list ViewModel"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -26,19 +26,19 @@ namespace ToneWell.Controls
             {
                 WidthRequest = 36,
                 HeightRequest = 36,
-
             };
 
             title = new Label
             {
-                FontSize = 14,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 16,
                 TextColor = Colors.l_TextPrimary
             };
 
 
             grid = new Grid
             {
-                ColumnSpacing = 0,
+                ColumnSpacing = 10,
             };
 
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
@@ -74,6 +74,14 @@ namespace ToneWell.Controls
             set { SetValue(IconSizeProperty, value); }
         }
 
+        public static readonly BindableProperty TextSizeProperty = BindableProperty.Create(nameof(TextSize), typeof(double), typeof(ImageLabelItem), default(double));
+
+        public double TextSize
+        {
+            get { return (double)GetValue(TextSizeProperty); }
+            set { SetValue(TextSizeProperty, value); }
+        }
+
         public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(string), typeof(ImageLabelItem), default(string));
 
         public string Icon
@@ -107,6 +115,11 @@ namespace ToneWell.Controls
                 title.Text = Title;
             }
 
+            if(propertyName == TextSizeProperty.PropertyName)
+            {
+                title.FontSize = TextSize;
+            }
+
             if (propertyName == IconSizeProperty.PropertyName)
             {
                 icon.HeightRequest = IconSize;
@@ -123,8 +136,5 @@ namespace ToneWell.Controls
                 (GestureRecognizers.First() as TapGestureRecognizer).CommandParameter = CommandParameter;
             }
         }
-
-
-
     }
 }

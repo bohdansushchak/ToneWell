@@ -23,7 +23,7 @@ namespace ToneWell
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("CustomNavigationPage/QueuePage");
+            await NavigationService.NavigateAsync("CustomNavigationPage/YourLibraryPage");
 
             //TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
         }
@@ -49,6 +49,7 @@ namespace ToneWell
             containerRegistry.RegisterForNavigation<CustomNavigationPage>();
             containerRegistry.RegisterForNavigation<QueuePage, QueuePageViewModel>();
             containerRegistry.RegisterForNavigation<PlayerPage, PlayerPageViewModel>();
+            containerRegistry.RegisterForNavigation<YourLibraryPage, YourLibraryPageViewModel>();
         }
     }
 }

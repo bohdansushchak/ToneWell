@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ToneWell.Controls;assembly=ToneWell"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:control="clr-namespace:ToneWell.Controls;assembly=ToneWell"
+             xmlns:converter="clr-namespace:ToneWell.Converters;assembly=ToneWell"
+             xmlns:helper="clr-namespace:ToneWell.Helpers;assembly=ToneWell"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ToneWell.Views.YourLibraryPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <StackLayout Margin="10,15,10,15" Spacing="10">
+
+                <local:ImageLabelItem Title="Playlists" Command="{Binding TapItemCommand}" CommandParameter="PlayList" />
+                <local:ImageLabelItem Title="Songs" Command="{Binding TapItemCommand}" CommandParameter="Songs" />
+                <local:ImageLabelItem Title="Artists" Command="{Binding TapItemCommand}" CommandParameter="Artists" />
+
+            </StackLayout>
+
+            <Label Text="Recently Played" FontSize="18" TextColor="{x:Static helper:Colors.l_TextPrimary}" HorizontalOptions="Center" />
+            
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

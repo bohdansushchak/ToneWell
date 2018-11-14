@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ToneWell.Helpers;
 using Xamarin.Forms;
 
 namespace ToneWell.ViewModels
@@ -10,6 +8,7 @@ namespace ToneWell.ViewModels
         public CustomNavigationPage()
         {
             BarBackgroundColor = Color.FromHex("#ffffff");
+            BarTextColor = Colors.l_TextPrimary;
             
         }
     }

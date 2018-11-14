@@ -42,6 +42,7 @@ namespace ToneWell.ViewModels
         }
 
         public ICommand TapItemCommand { get; set; }
+
         public ICommand GoCommand { get; set; }
     
         public ICommand PlayOrPauseCommand { get; set; }
@@ -69,7 +70,7 @@ namespace ToneWell.ViewModels
             }
             else
             {
-                playerService.Play(Track);
+               // playerService.Play(Track);
             }
 
         }

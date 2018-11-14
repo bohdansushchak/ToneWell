@@ -43,7 +43,36 @@ namespace ToneWell.ViewModels
 
         public ICommand TapItemCommand { get; set; }
         public ICommand GoCommand { get; set; }
+    
+        public ICommand PlayOrPauseCommand { get; set; }
 
+        public ICommand NextCommand { get; set; }
+
+        public ICommand PreviousCommand { get; set; }
+
+        private void nextTrackAction()
+        {
+            playerService.PlayNextTrack();
+            //Track = playerService.CurrentTrack;
+        }
+
+        private void previousTrackAction()
+        {
+            playerService.PlayPreviousTrack();
+            //Track = playerService.CurrentTrack;
+        }
+        private void playOrPauseAction()
+        {
+            if (playerService.IsPlaying)
+            {
+                playerService.Pause();
+            }
+            else
+            {
+                playerService.Play(Track);
+            }
+
+        }
 
         private ObservableCollection<Track> _tracks;
         public ObservableCollection<Track> Tracks

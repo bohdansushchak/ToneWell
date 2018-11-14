@@ -22,7 +22,7 @@
 
         <local:TrackListView Items="{Binding Tracks, Mode=TwoWay}" TapItemCommand="{Binding TapItemCommand}" Grid.Row="2"/>
 
-        <local:MiniPlayerView Grid.Row="3"/>
+        <local:MiniPlayerView PlayOrPauseCommand="{}"  Grid.Row="3"/>
 
     </Grid>
 

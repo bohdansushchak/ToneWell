@@ -11,9 +11,9 @@
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Song list ViewModel"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <control:SoungListView Items="{Binding Tracks, Mode=TwoWay}" TapItemCommand="{Binding TapItemCommand}" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

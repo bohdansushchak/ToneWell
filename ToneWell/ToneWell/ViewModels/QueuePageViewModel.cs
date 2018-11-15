@@ -13,7 +13,6 @@ namespace ToneWell.ViewModels
         protected INavigationService navigationService;
         protected PlayerService playerService;
         
-
         public QueuePageViewModel(INavigationService navigationService)
            : base(navigationService)
         {
@@ -21,6 +20,7 @@ namespace ToneWell.ViewModels
 
             this.navigationService = navigationService;
             this.playerService = PlayerService.Instance;
+            ProgressDegree = 0;
 
             TapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
 
@@ -49,6 +49,8 @@ namespace ToneWell.ViewModels
 
             var parametr = new NavigationParameters();
             parametr.Add("item", item);
+
+            Track = item;
 
             navigationService.NavigateAsync("PlayerPage", parametr);
         }

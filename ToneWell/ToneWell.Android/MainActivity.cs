@@ -120,8 +120,9 @@ namespace ToneWell.Droid
             containerRegistry.Register<IFileService, FileService>();
             containerRegistry.Register<IMyMediaPlayer, MyMediaPlayer>();
 
-            App.Container.Register<IFileService, FileService>();
-            App.Container.Register<IMyMediaPlayer, MyMediaPlayer>();
+            App.MyContainer.Register<IFileService, FileService>();
+            App.MyContainer.Register<IMyMediaPlayer, MyMediaPlayer>();
+            App.MyContainer.Register<IDbPath, AndroidDbPath>();
 
         }
     }

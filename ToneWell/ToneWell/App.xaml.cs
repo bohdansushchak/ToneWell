@@ -10,7 +10,7 @@ namespace ToneWell
 {
     public partial class App
     {
-        public static Container Container { get; private set; } = new Container();
+        public static Container MyContainer { get; private set; } = new Container();
 
         public App() : this(null)
         {}

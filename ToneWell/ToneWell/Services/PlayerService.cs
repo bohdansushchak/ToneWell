@@ -35,8 +35,8 @@ namespace ToneWell.Services
             Tracks = new List<Track>();
             CurrentTrack = new Track();
 
-            fileService = App.Container.Resolve<IFileService>();
-            mediaPlayer = App.Container.Resolve<IMyMediaPlayer>();
+            fileService = App.MyContainer.Resolve<IFileService>();
+            mediaPlayer = App.MyContainer.Resolve<IMyMediaPlayer>();
 
             RepeatTracks = false;
             ShuffleTracks = false;

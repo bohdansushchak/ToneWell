@@ -13,11 +13,10 @@ namespace ToneWell
         public static Container MyContainer { get; private set; } = new Container();
 
         public App() : this(null)
-        {}
+        { }
 
         public App(IPlatformInitializer initializer) : base(initializer)
-        {
-        }
+        { }
 
         protected override async void OnInitialized()
         {
@@ -51,6 +50,7 @@ namespace ToneWell
             containerRegistry.RegisterForNavigation<PlayerPage, PlayerPageViewModel>();
             containerRegistry.RegisterForNavigation<YourLibraryPage, YourLibraryPageViewModel>();
             containerRegistry.RegisterForNavigation<SongListPage, SongListPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
         }
     }
 }

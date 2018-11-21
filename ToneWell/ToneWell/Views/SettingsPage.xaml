@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:control="clr-namespace:ToneWell.Controls;assembly=ToneWell"
+             xmlns:converter="clr-namespace:ToneWell.Converters;assembly=ToneWell"
+             xmlns:helper="clr-namespace:ToneWell.Helpers;assembly=ToneWell"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="ToneWell.Views.SettingsPage"
+             Title="{Binding Title}">
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+
+            <Button Text="Update tracks" Command="{Binding UpdateTracks}"/>
+            
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

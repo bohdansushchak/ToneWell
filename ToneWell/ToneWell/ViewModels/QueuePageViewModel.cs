@@ -5,6 +5,7 @@ using System.Windows.Input;
 using ToneWell.Helpers;
 using ToneWell.Models;
 using ToneWell.Services;
+using DryIoc;
 
 namespace ToneWell.ViewModels
 {
@@ -12,6 +13,7 @@ namespace ToneWell.ViewModels
     {
         protected INavigationService navigationService;
         protected PlayerService playerService;
+        protected ITrackManager trackManager;
         
         public QueuePageViewModel(INavigationService navigationService)
            : base(navigationService)
@@ -20,13 +22,15 @@ namespace ToneWell.ViewModels
 
             this.navigationService = navigationService;
             this.playerService = PlayerService.Instance;
+            this.trackManager = App.Container.Resolve<ITrackManager>();
+
             ProgressDegree = 0;
 
             TapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
 
             GoCommand = new DelegateCommand(() =>
             {
-                var tracks = playerService.initializeTracks();
+                var tracks = trackManager.GetAllTracks().GetAwaiter().GetResult();
 
                 Tracks = new ObservableCollection<Track>(tracks);
             });

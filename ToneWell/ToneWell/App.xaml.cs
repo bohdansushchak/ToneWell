@@ -1,6 +1,7 @@
 ﻿using DryIoc;
 using Prism;
 using Prism.Ioc;
+using ToneWell.Services;
 using ToneWell.ViewModels;
 using ToneWell.Views;
 using Xamarin.Forms.Xaml;
@@ -10,7 +11,7 @@ namespace ToneWell
 {
     public partial class App
     {
-        public static Container MyContainer { get; private set; } = new Container();
+        public static Container Container { get; private set; } = new Container();
 
         public App() : this(null)
         { }
@@ -51,6 +52,8 @@ namespace ToneWell
             containerRegistry.RegisterForNavigation<YourLibraryPage, YourLibraryPageViewModel>();
             containerRegistry.RegisterForNavigation<SongListPage, SongListPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+
+            Container.Register<ITrackManager, TrackManager>(Reuse.Singleton);
         }
     }
 }

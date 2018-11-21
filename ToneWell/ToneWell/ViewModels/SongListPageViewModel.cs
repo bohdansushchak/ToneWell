@@ -23,7 +23,7 @@ namespace ToneWell.ViewModels
 
             TapItemCommand = new DelegateCommand<Syncfusion.ListView.XForms.ItemTappedEventArgs>(tapItem);
 
-            var trackse = playerService.initializeTracks();
+            var trackse = playerService.Tracks;
 
             Tracks = new ObservableCollection<Track>(trackse);
         }

@@ -16,7 +16,7 @@ namespace ToneWell.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var dbPath = App.MyContainer.Resolve<IDbPath>().GetDatabasePath("ToneWellDb.db");
+            var dbPath = App.Container.Resolve<IDbPath>().GetDatabasePath("ToneWellDb.db");
 
             optionsBuilder.UseSqlite($"Filename={dbPath}");
 

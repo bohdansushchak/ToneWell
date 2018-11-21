@@ -13,8 +13,8 @@ namespace ToneWell.Services
         private static volatile PlayerService instance;
         private static object syncRoot = new Object();
 
-        private IFileService fileService;
         private IMyMediaPlayer mediaPlayer;
+        private ITrackManager trackManager;
 
         private Thread updateProgressThread;
 
@@ -35,8 +35,8 @@ namespace ToneWell.Services
             Tracks = new List<Track>();
             CurrentTrack = new Track();
 
-            fileService = App.MyContainer.Resolve<IFileService>();
-            mediaPlayer = App.MyContainer.Resolve<IMyMediaPlayer>();
+            mediaPlayer = App.Container.Resolve<IMyMediaPlayer>();
+            trackManager = App.Container.Resolve<ITrackManager>();
 
             RepeatTracks = false;
             ShuffleTracks = false;
@@ -45,7 +45,7 @@ namespace ToneWell.Services
             updateProgressThread.IsBackground = true;
             updateProgressThread.Start();
 
-            Tracks = initializeTracks();
+            Tracks = trackManager.GetAllTracks().GetAwaiter().GetResult();
         }
 
         public static PlayerService Instance
@@ -176,51 +176,6 @@ namespace ToneWell.Services
                 mediaPlayer.StartPlayer(CurrentTrack.FilePath);
             }
 
-        }
-
-        public List<Track> initializeTracks()
-        {
-            var filePaths = fileService.FindAllMp3Files();
-
-            var tracks = new List<Track>();
-
-            foreach (var file in filePaths)
-            {
-                var track = new Track();
-
-                try
-                {
-                    TagLib.File tagFile = TagLib.File.Create(file);
-
-                    string artist = tagFile.Tag.FirstAlbumArtist;
-                    string title = tagFile.Tag.Title;
-
-                    if (string.IsNullOrEmpty(title))
-                    {
-                        title = file.Split('/').Last().Split('.').First();
-                    }
-
-                    track.Title = title;
-                    track.Artist = artist;
-                    
-                }
-                catch(Exception e)
-                {
-                    track.Title = file.Split('/').Last().Split('.').First();                    
-                }
-                finally
-                {
-                    track.FilePath = file;
-                }
-
-                tracks.Add(track);
-            }
-
-            Tracks = tracks;
-
-            CurrentTrack = Tracks.FirstOrDefault();
-
-            return tracks;
         }
     }
 }
